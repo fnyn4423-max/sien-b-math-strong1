@@ -352,13 +352,24 @@
       box-shadow: 0 2px 0 #075985;
     }
 
-    .photo-status-indicator {
-      font-size: 1rem;
+    .btn-adjust-toggle {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      color: #334155;
+      padding: 9px 16px;
+      border-radius: 14px;
+      font-size: 0.95rem;
       font-weight: 800;
-      color: #0369a1;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    .btn-adjust-toggle.active {
+      background: #fef08a;
+      border-color: #eab308;
+      color: #854d0e;
     }
 
     /* 先生用：写真の長さ設定（手動調整） */
@@ -386,7 +397,7 @@
       background: white;
     }
 
-    /* 計測ステージエリア */
+    /* 計測ステージエリア（写真表示・ズーム・アニメーション） */
     .stage-wrapper {
       position: relative;
       background: #0f172a;
@@ -398,7 +409,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      min-height: 310px;
+      min-height: 330px;
       box-shadow: inset 0 2px 10px rgba(0,0,0,0.4);
     }
 
@@ -442,13 +453,13 @@
       background: rgba(255,255,255,0.25);
     }
 
-    /* ステージグラフィック表示コンテナ */
+    /* ステージグラフィック表示コンテナ（写真が主役） */
     .stage-canvas-area {
       position: relative;
       width: 100%;
       max-width: 960px;
-      height: 250px;
-      background: #1e293b;
+      height: 270px;
+      background: #020617;
       border-radius: 20px;
       overflow: hidden;
       cursor: pointer;
@@ -472,7 +483,7 @@
       gap: 12px;
       color: #94a3b8;
       z-index: 5;
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.92);
       cursor: pointer;
     }
 
@@ -481,15 +492,15 @@
     }
 
     .empty-photo-text {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 900;
       color: #38bdf8;
     }
 
     .empty-photo-sub {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #94a3b8;
+      color: #cbd5e1;
     }
 
     /* ズーム中バッジ表示 */
@@ -497,7 +508,7 @@
       position: absolute;
       top: 12px;
       left: 12px;
-      background: rgba(2, 132, 199, 0.9);
+      background: rgba(2, 132, 199, 0.92);
       color: white;
       font-size: 0.9rem;
       font-weight: 900;
@@ -511,15 +522,21 @@
       backdrop-filter: blur(4px);
     }
 
+    /* ガイドバー調整用ハンドル */
+    .adjust-handle {
+      cursor: ew-resize;
+      transition: opacity 0.2s;
+    }
+
     /* 点滅アニメーション */
     @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 8px #f59e0b); stroke-width: 4.5; }
-      50% { filter: drop-shadow(0 0 20px #ef4444); stroke-width: 6; }
+      0%, 100% { filter: drop-shadow(0 0 8px #f59e0b); stroke-width: 5; }
+      50% { filter: drop-shadow(0 0 20px #ef4444); stroke-width: 7; }
     }
 
     @keyframes lineBlink {
-      0%, 100% { opacity: 1; stroke-width: 5; }
-      50% { opacity: 0.25; stroke-width: 3; }
+      0%, 100% { opacity: 1; stroke-width: 6; }
+      50% { opacity: 0.2; stroke-width: 3; }
     }
 
     .highlight-cm-pulse {
@@ -874,7 +891,7 @@
 
           <!-- スーツ・首・シャツ -->
           <path d="M 28 88 L 36 68 L 64 68 L 72 88 Z" fill="#ffffff"/>
-          <path d="M 46 68 L 50 88 L 54 68 Z" fill="#0284c7"/> <!-- ネクタイ -->
+          <path d="M 46 68 L 50 88 L 54 68 Z" fill="#0284c7"/>
           <path d="M 18 92 Q 35 74 42 72 L 40 95 Z" fill="url(#coolSuitGrad)"/>
           <path d="M 82 92 Q 65 74 58 72 L 60 95 Z" fill="url(#coolSuitGrad)"/>
 
@@ -915,7 +932,7 @@
 
       <div class="speech-bubble">
         <div id="speechText" class="speech-text">
-          さあ、ものさしで 測った 写真を とってみよう。<br>写真の はかりたい 場所を タッチしてね！
+          さあ、ものさしで 測った 写真を とってみよう。<br>写真の はかりたい 場所（右はし）を タッチしてね！
         </div>
         <div class="speech-actions">
           <button id="btnReplayVoice" class="btn-replay-voice">
@@ -936,9 +953,9 @@
           </button>
           <input type="file" id="fileInput" accept="image/*" capture="environment">
 
-          <div id="photoStatusIndicator" class="photo-status-indicator">
-            <span>📁 写真：セット完了</span>
-          </div>
+          <button id="btnAdjustBars" class="btn-adjust-toggle" title="位置合わせバーを表示/非表示">
+            <span>📐</span> 位置合わせバーを 調整
+          </button>
         </div>
 
         <!-- 先生用：写真の長さ設定（手動調整） -->
@@ -951,14 +968,14 @@
         </div>
       </div>
 
-      <!-- 計測ステージエリア -->
+      <!-- 計測ステージエリア（写真が主役） -->
       <div class="stage-wrapper">
         
         <!-- 【てだすけ あり】専用：アニメーションバー -->
         <div id="assistAnimBar" class="assist-anim-bar">
           <div class="assist-guide-text">
             <span>💡</span>
-            <span id="assistGuideMessage">測りたい場所（物の右端）をタップすると、ズームしてアニメーションが始まるよ！</span>
+            <span id="assistGuideMessage">写真の 測りたい場所（物の右端）を タッチすると、ズームして アニメーションするよ！</span>
           </div>
           <button id="btnResetZoom" class="btn-reset-zoom">🔍 全体にもどす</button>
         </div>
@@ -967,18 +984,18 @@
         <div id="stageCanvasArea" class="stage-canvas-area" title="タップしてズーム＆アニメーション">
           
           <div id="zoomBadge" class="zoom-indicator-badge">
-            <span>🔍 ズームアップ中 (拡大表示)</span>
+            <span>🔍 ズームアップ中 (写真の目盛りを拡大)</span>
           </div>
 
           <!-- 写真未読み込み時のプレースホルダー案内 -->
-          <div id="emptyPlaceholder" class="empty-photo-placeholder" style="display:none;">
+          <div id="emptyPlaceholder" class="empty-photo-placeholder">
             <div class="empty-photo-icon">📷</div>
-            <div class="empty-photo-text">「写真をとる / えらぶ」を タッチしてね</div>
-            <div class="empty-photo-sub">ものさしと 一緒に 撮った写真を ここに表示します</div>
+            <div class="empty-photo-text">「ものさしと 写真をとる / えらぶ」を タッチしてね</div>
+            <div class="empty-photo-sub">物体を ものさしで はかっている写真を ここに表示します</div>
           </div>
 
-          <!-- メインSVG (写真 + ものさし + アニメーション線) -->
-          <svg id="mainStageSvg" class="stage-svg" viewBox="0 0 920 220">
+          <!-- メインSVG (写真 + 位置合わせバー + アニメーション線) -->
+          <svg id="mainStageSvg" class="stage-svg" viewBox="0 0 960 270">
             <defs>
               <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
                 <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.35"/>
@@ -988,43 +1005,52 @@
             <!-- 測定エリアの全体ラッパーグループ -->
             <g id="viewportGroup">
               
-              <!-- 写真レイヤー（背景） -->
+              <!-- 写真レイヤー（全面表示） -->
               <g id="photoBackgroundLayer">
-                <rect x="0" y="0" width="920" height="220" fill="#1e293b"/>
-                <g id="customPhotoImageGroup"></g>
+                <rect x="0" y="0" width="960" height="270" fill="#0f172a"/>
+                <!-- ユーザーの写真（実物写真）がここに入る -->
+                <image id="userPhotoImage" x="0" y="0" width="960" height="270" preserveAspectRatio="xMidYMid meet" style="display:none;"/>
               </g>
 
-              <!-- 物体レイヤー (X=40 が 0cm 基準) -->
-              <g id="measuredObjectLayer" transform="translate(40, 18)"></g>
+              <!-- 位置合わせガイド（0cmバー & 右端バー） -->
+              <g id="adjustBarsGroup">
+                <!-- 0cm ガイドバー（青） -->
+                <g id="bar0cmGroup" transform="translate(120, 0)">
+                  <line x1="0" y1="10" x2="0" y2="260" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4,4"/>
+                  <rect x="-35" y="8" width="70" height="24" rx="6" fill="#0284c7" opacity="0.9"/>
+                  <text x="0" y="24" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">0cm位置</text>
+                  <!-- 移動つまみ -->
+                  <circle cx="0" cy="245" r="14" fill="#38bdf8" stroke="#ffffff" stroke-width="2.5" class="adjust-handle"/>
+                  <text x="0" y="250" font-size="11" font-weight="900" fill="#0f172a" text-anchor="middle">◀▶</text>
+                </g>
 
-              <!-- 0cm基準ライン（視覚支援） -->
-              <line x1="40" y1="10" x2="40" y2="195" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="4,4"/>
-              <text x="36" y="24" font-size="12" font-weight="900" fill="#38bdf8" text-anchor="end">0に合わせる</text>
-
-              <!-- ものさし（定規）レイヤー (0cm〜15cm) -->
-              <g id="rulerGroup" transform="translate(40, 95)">
-                <!-- ものさし本体 -->
-                <rect x="0" y="0" width="760" height="92" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2" filter="url(#shadow)"/>
-                <!-- ものさしの目盛り -->
-                <g id="rulerTicks"></g>
-                <!-- cmの数字ハイライト用グループ -->
-                <g id="cmHighlightOverlay"></g>
-                <!-- mm目盛りハイライト用グループ -->
-                <g id="mmHighlightOverlay"></g>
+                <!-- 右端（はしっこ） ガイドバー（赤） -->
+                <g id="barEndGroup" transform="translate(680, 0)">
+                  <line x1="0" y1="10" x2="0" y2="260" stroke="#f97316" stroke-width="3" stroke-dasharray="4,4"/>
+                  <rect x="-35" y="8" width="70" height="24" rx="6" fill="#ea580c" opacity="0.9"/>
+                  <text x="0" y="24" font-size="13" font-weight="900" fill="#ffffff" text-anchor="middle">はしっこ</text>
+                  <!-- 移動つまみ -->
+                  <circle cx="0" cy="245" r="14" fill="#f97316" stroke="#ffffff" stroke-width="2.5" class="adjust-handle"/>
+                  <text x="0" y="250" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">◀▶</text>
+                </g>
               </g>
 
-              <!-- アニメーション描画レイヤー -->
-              <g id="animationLayer" transform="translate(40, 0)">
+              <!-- アニメーション描画レイヤー（写真上の目盛りに重ねて描画） -->
+              <g id="animationLayer">
                 <!-- cm基準線（太い赤色線） -->
-                <line id="animCmLine" x1="0" y1="15" x2="0" y2="190" stroke="#dc2626" stroke-width="5" stroke-linecap="round" style="display:none;"/>
-                <rect id="animCmLabelBg" x="-32" y="2" width="64" height="28" rx="8" fill="#dc2626" style="display:none;"/>
-                <text id="animCmLabel" x="0" y="22" font-size="18" font-weight="900" fill="white" text-anchor="middle" style="display:none;">0cm</text>
+                <line id="animCmLine" x1="0" y1="15" x2="0" y2="255" stroke="#dc2626" stroke-width="6" stroke-linecap="round" style="display:none;"/>
+                <rect id="animCmLabelBg" x="-34" y="6" width="68" height="28" rx="8" fill="#dc2626" style="display:none;"/>
+                <text id="animCmLabel" x="0" y="26" font-size="18" font-weight="900" fill="white" text-anchor="middle" style="display:none;">cm</text>
                 
                 <!-- mmカウントアップ線グループ -->
                 <g id="animMmLinesGroup"></g>
 
                 <!-- 停止時の目標マーカー線 -->
-                <line id="animTargetLine" x1="0" y1="15" x2="0" y2="190" stroke="#0284c7" stroke-width="4.5" stroke-dasharray="6,4" style="display:none;"/>
+                <line id="animTargetLine" x1="0" y1="15" x2="0" y2="255" stroke="#0284c7" stroke-width="5" stroke-dasharray="6,4" style="display:none;"/>
+
+                <!-- 採点時ヒント用ハイライト -->
+                <g id="cmHighlightOverlay"></g>
+                <g id="mmHighlightOverlay"></g>
               </g>
 
             </g>
@@ -1136,13 +1162,14 @@
       currentSlot: 'cm', // 'cm' | 'mm'
       inputCm: '',
       inputMm: '',
-      targetCm: 7,
-      targetMm: 4,
+      targetCm: 7, // 正解のcm
+      targetMm: 4, // 正解のmm
+      originX: 120, // 写真内の0cm位置のX座標
+      endX: 680,    // 写真内の右端位置のX座標
+      showAdjustBars: true, // 位置合わせバーの表示状態
       isAnimating: false,
       isZoomed: false,
       userImageDataUrl: null,
-      PIXELS_PER_CM: 48,
-      RULER_ORIGIN_X: 40,
     };
 
     /**
@@ -1285,96 +1312,33 @@
     }
 
     /**
-     * 定規の目盛り描画 (0cm〜15cm)
+     * 写真と位置合わせバーの更新
      */
-    function renderRulerTicks() {
-      const ticksGroup = document.getElementById('rulerTicks');
-      ticksGroup.innerHTML = '';
-
-      const totalCm = 15;
-      const pxPerCm = STATE.PIXELS_PER_CM;
-
-      for (let cm = 0; cm <= totalCm; cm++) {
-        const cmX = cm * pxPerCm;
-
-        // cmの大目盛り線
-        const cmLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        cmLine.setAttribute('x1', cmX);
-        cmLine.setAttribute('y1', 0);
-        cmLine.setAttribute('x2', cmX);
-        cmLine.setAttribute('y2', 38);
-        cmLine.setAttribute('stroke', '#0f172a');
-        cmLine.setAttribute('stroke-width', '2.8');
-        ticksGroup.appendChild(cmLine);
-
-        // cmの数字ラベル
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', cmX);
-        text.setAttribute('y', 64);
-        text.setAttribute('font-size', '20');
-        text.setAttribute('font-weight', '900');
-        text.setAttribute('fill', '#0f172a');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('id', `cmText_${cm}`);
-        text.textContent = cm;
-        ticksGroup.appendChild(text);
-
-        // 1mm〜9mmの目盛り線
-        if (cm < totalCm) {
-          for (let mm = 1; mm <= 9; mm++) {
-            const mmX = cmX + (mm * (pxPerCm / 10));
-            const is5mm = (mm === 5);
-            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            line.setAttribute('x1', mmX);
-            line.setAttribute('y1', 0);
-            line.setAttribute('x2', mmX);
-            line.setAttribute('y2', is5mm ? 26 : 17);
-            line.setAttribute('stroke', is5mm ? '#334155' : '#64748b');
-            line.setAttribute('stroke-width', is5mm ? '2.2' : '1.3');
-            line.setAttribute('id', `mmTick_${cm}_${mm}`);
-            ticksGroup.appendChild(line);
-          }
-        }
-      }
-    }
-
-    /**
-     * ステージの物体／写真の再描画
-     */
-    function updateStageVisuals() {
-      const objLayer = document.getElementById('measuredObjectLayer');
-      const customImgGroup = document.getElementById('customPhotoImageGroup');
+    function updateStageElements() {
+      const photoImg = document.getElementById('userPhotoImage');
       const placeholder = document.getElementById('emptyPlaceholder');
-      const statusIndicator = document.getElementById('photoStatusIndicator');
-
-      const widthPx = (STATE.targetCm * STATE.PIXELS_PER_CM) + (STATE.targetMm * (STATE.PIXELS_PER_CM / 10));
+      const bar0 = document.getElementById('bar0cmGroup');
+      const barEnd = document.getElementById('barEndGroup');
+      const barsGroup = document.getElementById('adjustBarsGroup');
 
       if (STATE.userImageDataUrl) {
+        photoImg.setAttribute('href', STATE.userImageDataUrl);
+        photoImg.style.display = 'block';
         placeholder.style.display = 'none';
-        statusIndicator.innerHTML = '<span>📁 写真：セット完了</span>';
-        
-        customImgGroup.innerHTML = `
-          <image href="${STATE.userImageDataUrl}" x="0" y="0" width="920" height="220" preserveAspectRatio="xMidYMid slice" opacity="0.6"/>
-        `;
-        objLayer.innerHTML = `
-          <g filter="url(#shadow)">
-            <rect x="0" y="10" width="${widthPx}" height="68" rx="8" fill="rgba(56, 189, 248, 0.45)" stroke="#38bdf8" stroke-width="3"/>
-            <text x="${widthPx / 2}" y="50" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">写真の ものの 長さ</text>
-            <polygon points="${widthPx - 10},0 ${widthPx},12 ${widthPx - 10},24" fill="#f97316"/>
-          </g>
-        `;
       } else {
-        // 写真未読み込み時も、初期状態として測定対象バーを表示
-        placeholder.style.display = 'none';
-        statusIndicator.innerHTML = '<span>📷 写真をとって はかろう</span>';
-        customImgGroup.innerHTML = '';
-        objLayer.innerHTML = `
-          <g filter="url(#shadow)">
-            <rect x="0" y="10" width="${widthPx}" height="68" rx="8" fill="rgba(56, 189, 248, 0.55)" stroke="#38bdf8" stroke-width="3"/>
-            <text x="${widthPx / 2}" y="50" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">はかりたい もの</text>
-            <polygon points="${widthPx - 10},0 ${widthPx},12 ${widthPx - 10},24" fill="#f97316"/>
-          </g>
-        `;
+        photoImg.style.display = 'none';
+        placeholder.style.display = 'flex';
+      }
+
+      // 位置合わせバーの座標更新
+      bar0.setAttribute('transform', `translate(${STATE.originX}, 0)`);
+      barEnd.setAttribute('transform', `translate(${STATE.endX}, 0)`);
+
+      // 位置合わせバーの表示/非表示（チャレンジモードでは非表示）
+      if (STATE.mode === 'challenge' || !STATE.showAdjustBars) {
+        barsGroup.style.display = 'none';
+      } else {
+        barsGroup.style.display = 'block';
       }
 
       document.getElementById('selectTargetCm').value = STATE.targetCm;
@@ -1391,6 +1355,7 @@
 
     /**
      * ズームアップ状態の切り替え
+     * 写真の「右端（測定箇所）」周辺にダイナミックズーム
      */
     function setZoomView(isZoomed) {
       STATE.isZoomed = isZoomed;
@@ -1399,19 +1364,20 @@
       const resetBtn = document.getElementById('btnResetZoom');
 
       if (isZoomed) {
-        const targetX = STATE.RULER_ORIGIN_X + (STATE.targetCm * STATE.PIXELS_PER_CM) + (STATE.targetMm * (STATE.PIXELS_PER_CM / 10));
-        const zoom = 2.8;
+        const targetX = STATE.endX;
+        const zoom = 2.7;
 
-        const viewW = 920 / zoom;
-        const viewH = 220 / zoom;
-        const viewX = Math.max(0, Math.min(920 - viewW, targetX - (viewW * 0.65)));
+        const viewW = 960 / zoom;
+        const viewH = 270 / zoom;
+        // 右端が中央やや右に来るようにX座標を計算
+        const viewX = Math.max(0, Math.min(960 - viewW, targetX - (viewW * 0.65)));
         const viewY = 40;
 
         svg.setAttribute('viewBox', `${viewX} ${viewY} ${viewW} ${viewH}`);
         badge.style.display = 'inline-flex';
         resetBtn.style.display = 'block';
       } else {
-        svg.setAttribute('viewBox', '0 0 920 220');
+        svg.setAttribute('viewBox', '0 0 960 270');
         badge.style.display = 'none';
         resetBtn.style.display = 'none';
       }
@@ -1442,9 +1408,6 @@
       }
     }
 
-    /**
-     * ハイライトのクリア
-     */
     function clearHighlights() {
       document.getElementById('cmHighlightOverlay').innerHTML = '';
       document.getElementById('mmHighlightOverlay').innerHTML = '';
@@ -1453,21 +1416,24 @@
     }
 
     /**
-     * cmの間違い時仕様
+     * cm間違い時のハイライト演出（写真のcm位置付近をハイライト）
      */
     function highlightCmHint() {
       clearHighlights();
-      const targetCm = STATE.targetCm;
+      const totalMm = (STATE.targetCm * 10) + STATE.targetMm;
+      if (totalMm <= 0) return;
+
+      const pxPerMm = (STATE.endX - STATE.originX) / totalMm;
+      const targetCmX = STATE.originX + (STATE.targetCm * 10 * pxPerMm);
       const cmOverlay = document.getElementById('cmHighlightOverlay');
-      const pxPerCm = STATE.PIXELS_PER_CM;
 
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', targetCm * pxPerCm);
-      circle.setAttribute('cy', 60);
-      circle.setAttribute('r', 25);
-      circle.setAttribute('fill', 'rgba(250, 204, 21, 0.5)');
+      circle.setAttribute('cx', targetCmX);
+      circle.setAttribute('cy', 140);
+      circle.setAttribute('r', 32);
+      circle.setAttribute('fill', 'rgba(250, 204, 21, 0.45)');
       circle.setAttribute('stroke', '#dc2626');
-      circle.setAttribute('stroke-width', '4');
+      circle.setAttribute('stroke-width', '5');
       circle.setAttribute('class', 'highlight-cm-pulse');
       cmOverlay.appendChild(circle);
 
@@ -1477,31 +1443,32 @@
     }
 
     /**
-     * mmの間違い時仕様
+     * mm間違い時のハイライト演出（写真のmm目盛り線をハイライト）
      */
     function highlightMmHint() {
       clearHighlights();
-      const targetCm = STATE.targetCm;
-      const targetMm = STATE.targetMm;
-      const mmOverlay = document.getElementById('mmHighlightOverlay');
-      const pxPerCm = STATE.PIXELS_PER_CM;
-      const startX = targetCm * pxPerCm;
+      const totalMm = (STATE.targetCm * 10) + STATE.targetMm;
+      if (totalMm <= 0) return;
 
-      for (let mm = 1; mm <= targetMm; mm++) {
-        const mmX = startX + (mm * (pxPerCm / 10));
+      const pxPerMm = (STATE.endX - STATE.originX) / totalMm;
+      const startCmX = STATE.originX + (STATE.targetCm * 10 * pxPerMm);
+      const mmOverlay = document.getElementById('mmHighlightOverlay');
+
+      for (let mm = 1; mm <= STATE.targetMm; mm++) {
+        const mmX = startCmX + (mm * pxPerMm);
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', mmX);
-        line.setAttribute('y1', 0);
+        line.setAttribute('y1', 30);
         line.setAttribute('x2', mmX);
-        line.setAttribute('y2', 36);
+        line.setAttribute('y2', 240);
         line.setAttribute('stroke', '#dc2626');
         line.setAttribute('stroke-width', '4.5');
         mmOverlay.appendChild(line);
 
         const num = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         num.setAttribute('x', mmX);
-        num.setAttribute('y', -6);
-        num.setAttribute('font-size', '14');
+        num.setAttribute('y', 25);
+        num.setAttribute('font-size', '15');
         num.setAttribute('font-weight', '900');
         num.setAttribute('fill', '#dc2626');
         num.setAttribute('text-anchor', 'middle');
@@ -1516,8 +1483,7 @@
 
     /**
      * 採点処理
-     * ★先生は「回答が入力されるまで答えを言わない」
-     * 正解が入力されて「できた！」を押した時に初めて答えを言う！
+     * ★回答が入力されるまで先生は「答えの数字」を言わない
      */
     function checkAnswer() {
       const userCm = parseInt(STATE.inputCm, 10);
@@ -1535,8 +1501,6 @@
       const isMmCorrect = (userMm === STATE.targetMm);
 
       if (isCmCorrect && isMmCorrect) {
-        // 1. 正解時仕様
-        // ここで初めて「◯cm ◯mm だね！」と正解を発表！
         clearHighlights();
         sound.playFanfare();
         const successMsg = `すごーい！しっかり はかれたね！ ${STATE.targetCm}cm ${STATE.targetMm}mm だね。はなまる！`;
@@ -1544,13 +1508,11 @@
         showHanamaruModal(successMsg);
 
       } else if (!isCmCorrect) {
-        // 2. 「cm」の間違い時仕様
         sound.playOshii();
         highlightCmHint();
         updateTeacherSpeech('おしい！ 大きい 線の すうじ（cm）を もういちど 見てみよう。もう一度 答えてみよう！');
 
       } else {
-        // 3. 「mm」の間違い時仕様
         sound.playOshii();
         highlightMmHint();
         updateTeacherSpeech('おしい！ 小さい 線（mm）を 1、2、3… と 数えてみよう。もう一度 答えてみよう！');
@@ -1578,45 +1540,48 @@
     }
 
     /**
-     * 【てだすけ あり】タップでズーム＆アニメーション
-     * ★重要：回答が入力されるまで先生は「答えの数字」を言わない！
-     * 「大きい線を見てみよう」「小さい線を1,2,3と数えてみよう」「何cm何mmかな？」と手助けする。
+     * 【てだすけ あり】写真上の本物の定規に重ねるアニメーション
+     * 写真の0cm〜右端のピクセル比率に基づいて正確に目盛りをなぞる！
      */
-    async function runTapZoomGuideAnimation() {
+    async function runPhotoZoomGuideAnimation() {
       if (STATE.isAnimating) return;
       STATE.isAnimating = true;
 
       clearHighlights();
       resetAnimationLayer();
 
-      const targetCm = STATE.targetCm;
-      const targetMm = STATE.targetMm;
-      const pxPerCm = STATE.PIXELS_PER_CM;
+      const totalMm = (STATE.targetCm * 10) + STATE.targetMm;
+      if (totalMm <= 0) {
+        STATE.isAnimating = false;
+        return;
+      }
 
-      // 1. タップ位置にズームアップ！
+      // 1mmあたりの写真上のピクセル幅を計算
+      const pxPerMm = (STATE.endX - STATE.originX) / totalMm;
+      const targetCmX = STATE.originX + (STATE.targetCm * 10 * pxPerMm);
+
+      // 1. タップ位置（右端）にズームアップ！
       setZoomView(true);
-      await sleep(600);
+      await sleep(650);
 
       // 2. cmの基準線表示: 太い赤色の基準線
-      // ★先生は答えを言わない：「大きい 線の すうじ（cm）を 見てみよう！」
+      // ★先生は答えを言わない
       updateTeacherSpeech(`まず、大きい 線の すうじ（cm）を 見てみよう！`);
       sound.playCountTick(440);
 
-      const cmX = targetCm * pxPerCm;
       const cmLine = document.getElementById('animCmLine');
       const cmBg = document.getElementById('animCmLabelBg');
       const cmLabel = document.getElementById('animCmLabel');
 
-      cmLine.setAttribute('x1', cmX);
-      cmLine.setAttribute('x2', cmX);
+      cmLine.setAttribute('x1', targetCmX);
+      cmLine.setAttribute('x2', targetCmX);
       cmLine.style.display = 'block';
 
-      // ラベルも数字ではなく「cmの線」として強調
-      cmBg.setAttribute('x', cmX - 32);
+      cmBg.setAttribute('x', targetCmX - 34);
       cmBg.style.display = 'block';
 
-      cmLabel.setAttribute('x', cmX);
-      cmLabel.textContent = `cm`;
+      cmLabel.setAttribute('x', targetCmX);
+      cmLabel.textContent = `cmの線`;
       cmLabel.style.display = 'block';
 
       await sleep(1300);
@@ -1624,24 +1589,23 @@
       // 3. mmのカウントアップ
       const mmGroup = document.getElementById('animMmLinesGroup');
 
-      if (targetMm > 0) {
+      if (STATE.targetMm > 0) {
         updateTeacherSpeech(`つぎに、小さい 線（mm）を 1、2、3… と 数えてみよう！`, false);
 
-        for (let mm = 1; mm <= targetMm; mm++) {
+        for (let mm = 1; mm <= STATE.targetMm; mm++) {
           await sleep(650);
           sound.playCountTick(520 + (mm * 35));
 
-          const mmX = cmX + (mm * (pxPerCm / 10));
+          const mmX = targetCmX + (mm * pxPerMm);
           const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
           line.setAttribute('x1', mmX);
-          line.setAttribute('y1', 15);
+          line.setAttribute('y1', 20);
           line.setAttribute('x2', mmX);
-          line.setAttribute('y2', 185);
+          line.setAttribute('y2', 250);
           line.setAttribute('stroke', '#ea580c');
-          line.setAttribute('stroke-width', '3');
+          line.setAttribute('stroke-width', '3.5');
           mmGroup.appendChild(line);
 
-          // ガイドにも答えを言わず、1mm, 2mmのカウントのみ
           document.getElementById('assistGuideMessage').textContent = `👉 小さい線を かぞえるよ：${mm}mm`;
           updateTeacherSpeech(`${mm}mm`, false);
         }
@@ -1650,11 +1614,9 @@
       await sleep(500);
 
       // 4. 目的位置で停止・点滅
-      // ★先生は答えを言わない：「ここが はしっこ！ なんcm なんmm かな？ こたえを いれてみよう！」
-      const finalX = cmX + (targetMm * (pxPerCm / 10));
       const targetLine = document.getElementById('animTargetLine');
-      targetLine.setAttribute('x1', finalX);
-      targetLine.setAttribute('x2', finalX);
+      targetLine.setAttribute('x1', STATE.endX);
+      targetLine.setAttribute('x2', STATE.endX);
       targetLine.style.display = 'block';
       targetLine.classList.add('target-line-blink');
 
@@ -1687,13 +1649,14 @@
         btnAssist.classList.add('active');
         btnChallenge.classList.remove('active');
         assistAnimBar.style.display = 'flex';
-        updateTeacherSpeech('✨【てだすけ あり】モード だよ。<br>測りたい場所を タッチすると、ズームして アニメーションが はじまるよ！');
+        updateTeacherSpeech('✨【てだすけ あり】モード だよ。<br>写真の 測りたい場所を タッチすると、ズームして アニメーションが はじまるよ！');
       } else {
         btnChallenge.classList.add('active');
         btnAssist.classList.remove('active');
         assistAnimBar.style.display = 'none';
-        updateTeacherSpeech('🔥【てだすけ なし】モード だよ。<br>ズームなしで、自分の 目で ものさしの 目盛りを 読んでみよう！');
+        updateTeacherSpeech('🔥【てだすけ なし】モード だよ。<br>ズームなしで、自分の 目で 写真のものさしの 目盛りを 読んでみよう！');
       }
+      updateStageElements();
     }
 
     /**
@@ -1717,12 +1680,11 @@
         checkAnswer();
         return;
       } else {
-        // 数字キー '0'〜'9'
         if (STATE.currentSlot === 'cm') {
           if (STATE.inputCm.length < 2) {
             STATE.inputCm += key;
-            if (parseInt(STATE.inputCm, 10) > 15) {
-              STATE.inputCm = '15';
+            if (parseInt(STATE.inputCm, 10) > 30) {
+              STATE.inputCm = '30';
             }
           }
           if (STATE.inputCm.length >= 1) {
@@ -1751,10 +1713,49 @@
       const reader = new FileReader();
       reader.onload = (e) => {
         STATE.userImageDataUrl = e.target.result;
-        updateStageVisuals();
-        updateTeacherSpeech('写真が 入ったよ！<br>測りたい場所（物の右端）を タッチしてみてね！');
+        updateStageElements();
+        updateTeacherSpeech('写真が 入ったよ！<br>「🔵0cm位置」と「🔴はしっこ」を 写真のものさしに 合わせたら、測りたい場所を タッチしてね！');
       };
       reader.readAsDataURL(file);
+    }
+
+    /**
+     * 位置合わせバーのドラッグ移動
+     */
+    function setupBarDrag() {
+      const bar0 = document.getElementById('bar0cmGroup');
+      const barEnd = document.getElementById('barEndGroup');
+      const stageArea = document.getElementById('stageCanvasArea');
+
+      let draggingBar = null;
+
+      function onPointerDown(e, barType) {
+        if (STATE.mode !== 'assist' || !STATE.showAdjustBars) return;
+        e.stopPropagation();
+        draggingBar = barType;
+        sound.init();
+      }
+
+      bar0.addEventListener('pointerdown', (e) => onPointerDown(e, '0cm'));
+      barEnd.addEventListener('pointerdown', (e) => onPointerDown(e, 'end'));
+
+      window.addEventListener('pointermove', (e) => {
+        if (!draggingBar) return;
+        const rect = stageArea.getBoundingClientRect();
+        const clientX = e.clientX - rect.left;
+        const svgX = Math.round((clientX / rect.width) * 960);
+
+        if (draggingBar === '0cm') {
+          STATE.originX = Math.max(20, Math.min(STATE.endX - 40, svgX));
+        } else if (draggingBar === 'end') {
+          STATE.endX = Math.max(STATE.originX + 40, Math.min(940, svgX));
+        }
+        updateStageElements();
+      });
+
+      window.addEventListener('pointerup', () => {
+        draggingBar = null;
+      });
     }
 
     /**
@@ -1764,7 +1765,7 @@
       const selectCm = document.getElementById('selectTargetCm');
       const selectMm = document.getElementById('selectTargetMm');
 
-      for (let i = 0; i <= 15; i++) {
+      for (let i = 0; i <= 30; i++) {
         const opt = document.createElement('option');
         opt.value = i;
         opt.textContent = i;
@@ -1780,12 +1781,12 @@
 
       selectCm.addEventListener('change', (e) => {
         STATE.targetCm = parseInt(e.target.value, 10);
-        updateStageVisuals();
+        updateStageElements();
       });
 
       selectMm.addEventListener('change', (e) => {
         STATE.targetMm = parseInt(e.target.value, 10);
-        updateStageVisuals();
+        updateStageElements();
       });
     }
 
@@ -1794,8 +1795,8 @@
      */
     function initApp() {
       initSelectBoxes();
-      renderRulerTicks();
-      updateStageVisuals();
+      setupBarDrag();
+      updateStageElements();
 
       // モード切り替え
       document.getElementById('btnModeAssist').addEventListener('click', () => switchMode('assist'));
@@ -1806,25 +1807,34 @@
         resetZoomView();
       });
 
+      // 位置合わせバー表示トグル
+      document.getElementById('btnAdjustBars').addEventListener('click', (e) => {
+        STATE.showAdjustBars = !STATE.showAdjustBars;
+        e.currentTarget.classList.toggle('active', STATE.showAdjustBars);
+        updateStageElements();
+      });
+
       // 写真撮影・読み込みボタン
       const fileInput = document.getElementById('fileInput');
       document.getElementById('btnTakePhoto').addEventListener('click', () => {
         sound.init();
         fileInput.click();
       });
+      document.getElementById('emptyPlaceholder').addEventListener('click', () => {
+        sound.init();
+        fileInput.click();
+      });
       fileInput.addEventListener('change', handlePhotoFile);
 
-      // 【てだすけ あり】キャンバスをタップでズーム＆アニメーション
+      // 【てだすけ あり】写真エリアをタップでズーム＆アニメーション
       const stageArea = document.getElementById('stageCanvasArea');
       stageArea.addEventListener('pointerdown', (e) => {
         sound.init();
-        if (STATE.mode === 'assist') {
-          // もし写真未ロードでタップされたらファイルピッカー起動
+        if (STATE.mode === 'assist' && !STATE.isAnimating) {
           if (!STATE.userImageDataUrl) {
-            // そのままアニメーション実行
-            runTapZoomGuideAnimation();
+            fileInput.click();
           } else {
-            runTapZoomGuideAnimation();
+            runPhotoZoomGuideAnimation();
           }
         }
       });
