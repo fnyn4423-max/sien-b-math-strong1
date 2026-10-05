@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>なんばせんせいと ながさを はかろう！【cmとmm】</title>
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-light: #dbeafe;
+      --accent-color: #ea580c;
+      --accent-light: #ffedd5;
+      --success-color: #16a34a;
+      --warning-color: #f59e0b;
+      --danger-color: #dc2626;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --focus-ring: #fbbf24;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+      --shadow-md: 0 6px 12px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 12px 24px -4px rgba(0,0,0,0.15);
+      --font-family: system-ui, -apple-system, "UD デジタル 教科書体 N-R", "UD Digital Textbook NP-R", "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      touch-action: manipulation;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 1060px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      border: 3px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ヘッダーエリア */
+    header {
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      color: white;
+      padding: 14px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 4px solid #1d4ed8;
+    }
+
+    .app-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-icon {
+      width: 46px;
+      height: 46px;
+      background: #fef08a;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    .app-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .app-subtitle {
+      font-size: 0.85rem;
+      opacity: 0.95;
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-sound-toggle {
+      background: rgba(255,255,255,0.22);
+      border: 2px solid rgba(255,255,255,0.7);
+      color: white;
+      border-radius: 30px;
+      padding: 8px 18px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-sound-toggle:hover {
+      background: rgba(255,255,255,0.35);
+    }
+
+    /* モード選択タブ */
+    .mode-selector {
+      background: #eff6ff;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      border-bottom: 2px solid #bfdbfe;
+    }
+
+    .mode-tab-btn {
+      flex: 1;
+      max-width: 400px;
+      padding: 12px 18px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      font-family: inherit;
+      border-radius: 18px;
+      border: 3px solid #cbd5e1;
+      background: #ffffff;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 3px 0 #cbd5e1;
+    }
+
+    .mode-tab-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #cbd5e1;
+    }
+
+    .mode-tab-btn.active.assist-mode {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #92400e;
+      box-shadow: 0 4px 0 #d97706;
+    }
+
+    .mode-tab-btn.active.challenge-mode {
+      background: #dbeafe;
+      border-color: #2563eb;
+      color: #1e40af;
+      box-shadow: 0 4px 0 #1d4ed8;
+    }
+
+    .mode-badge {
+      font-size: 0.8rem;
+      background: #dc2626;
+      color: white;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: 800;
+    }
+
+    /* 難波先生キャラクターエリア */
+    .teacher-section {
+      background: #fffbeb;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 3px solid #fef08a;
+      position: relative;
+    }
+
+    .teacher-avatar-container {
+      flex-shrink: 0;
+      position: relative;
+      width: 104px;
+      height: 104px;
+    }
+
+    .teacher-avatar-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+    }
+
+    .teacher-name-tag {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ea580c;
+      color: white;
+      font-weight: 900;
+      font-size: 0.8rem;
+      padding: 3px 12px;
+      border-radius: 12px;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    }
+
+    .speech-bubble {
+      flex: 1;
+      background: white;
+      border: 3px solid #f59e0b;
+      border-radius: 22px;
+      padding: 14px 22px;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      min-height: 84px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -18px;
+      transform: translateY(-50%);
+      border-width: 11px 18px 11px 0;
+      border-style: solid;
+      border-color: transparent #f59e0b transparent transparent;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -13px;
+      transform: translateY(-50%);
+      border-width: 9px 14px 9px 0;
+      border-style: solid;
+      border-color: transparent white transparent transparent;
+    }
+
+    .speech-text {
+      font-size: 1.3rem;
+      font-weight: 900;
+      line-height: 1.5;
+      color: #78350f;
+      letter-spacing: 0.04em;
+    }
+
+    .speech-actions {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-replay-voice {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      color: #92400e;
+      font-size: 0.9rem;
+      font-weight: 800;
+      border-radius: 14px;
+      padding: 5px 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+
+    .btn-replay-voice:hover {
+      background: #fde68a;
+    }
+
+    /* メインコンテンツエリア */
+    .main-content {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* もんだい選択・写真操作バー */
+    .control-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: #f1f5f9;
+      padding: 10px 16px;
+      border-radius: 16px;
+      border: 2px solid #e2e8f0;
+    }
+
+    .preset-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .toolbar-label {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .preset-btn {
+      background: white;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 7px 14px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+    }
+
+    .preset-btn:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .preset-btn.active {
+      background: #eff6ff;
+      border-color: #2563eb;
+      color: #1d4ed8;
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.25);
+    }
+
+    .photo-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action-tool {
+      background: #ffffff;
+      border: 2px solid #2563eb;
+      color: #1d4ed8;
+      padding: 8px 16px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 0 #93c5fd;
+      transition: all 0.15s;
+    }
+
+    .btn-action-tool:hover {
+      background: #eff6ff;
+    }
+
+    .btn-action-tool:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    /* 計測ステージエリア */
+    .stage-wrapper {
+      position: relative;
+      background: #ffffff;
+      border: 3px solid #cbd5e1;
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 290px;
+    }
+
+    /* アニメーション支援コントロール */
+    .assist-anim-bar {
+      width: 100%;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #fef9c3;
+      border: 2px solid #fde047;
+      border-radius: 16px;
+      padding: 10px 18px;
+    }
+
+    .assist-guide-text {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #854d0e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-start-anim {
+      background: #ea580c;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 16px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 0 #9a3412;
+      transition: all 0.15s;
+    }
+
+    .btn-start-anim:hover {
+      background: #f97316;
+    }
+
+    .btn-start-anim:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #9a3412;
+    }
+
+    .btn-start-anim:disabled {
+      background: #cbd5e1;
+      color: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ステージグラフィック表示コンテナ */
+    .stage-canvas-area {
+      position: relative;
+      width: 100%;
+      max-width: 920px;
+      height: 220px;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    .stage-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ルーペ拡大表示オーバーレイ（虫眼鏡） */
+    .loupe-overlay {
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 5px solid #2563eb;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 0 16px rgba(0,0,0,0.25);
+      background: #ffffff;
+      overflow: hidden;
+      display: none;
+      z-index: 40;
+      transform: translate(-50%, -50%);
+      pointer-events: auto;
+    }
+
+    .loupe-content {
+      position: absolute;
+      transform-origin: 0 0;
+      pointer-events: none;
+    }
+
+    .loupe-crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 16px;
+      height: 16px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .loupe-crosshair::before, .loupe-crosshair::after {
+      content: '';
+      position: absolute;
+      background: #dc2626;
+    }
+    .loupe-crosshair::before {
+      top: 0; left: 7px; width: 2px; height: 16px;
+    }
+    .loupe-crosshair::after {
+      top: 7px; left: 0; width: 16px; height: 2px;
+    }
+
+    .loupe-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2563eb;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 900;
+      padding: 3px 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .loupe-close-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #dc2626;
+      color: white;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      z-index: 5;
+    }
+
+    /* ハイライト点滅エフェクト */
+    @keyframes cmPulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 6px #eab308); opacity: 1; }
+      50% { filter: drop-shadow(0 0 16px #ef4444); opacity: 0.6; }
+    }
+
+    @keyframes mmPulseGlow {
+      0%, 100% { stroke: #dc2626; stroke-width: 4; opacity: 1; }
+      50% { stroke: #eab308; stroke-width: 5; opacity: 0.7; }
+    }
+
+    @keyframes lineBlink {
+      0%, 100% { opacity: 1; stroke-width: 4; }
+      50% { opacity: 0.2; stroke-width: 2; }
+    }
+
+    .highlight-cm-area {
+      animation: cmPulseGlow 0.75s infinite;
+    }
+
+    .highlight-mm-area {
+      animation: mmPulseGlow 0.6s infinite;
+    }
+
+    .target-line-blink {
+      animation: lineBlink 0.5s infinite;
+    }
+
+    /* 下部：解答・テンキーエリア */
+    .interaction-panel {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .interaction-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 穴埋め解答カード */
+    .answer-card {
+      background: #ffffff;
+      border: 3px solid #bfdbfe;
+      border-radius: 22px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .answer-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #1e3a8a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .answer-boxes-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .answer-slot-group {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .answer-box {
+      width: 90px;
+      height: 80px;
+      background: #f8fafc;
+      border: 4px solid #cbd5e1;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #0f172a;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.06);
+    }
+
+    .answer-box.active {
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 5px rgba(37,99,235,0.25), inset 0 2px 4px rgba(37,99,235,0.1);
+      transform: scale(1.05);
+    }
+
+    .answer-box.highlight-error {
+      border-color: #dc2626 !important;
+      background: #fef2f2 !important;
+      box-shadow: 0 0 0 6px rgba(220,38,38,0.3) !important;
+      animation: shakeBox 0.5s ease-in-out;
+    }
+
+    @keyframes shakeBox {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .unit-label {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #334155;
+    }
+
+    .input-indicator-text {
+      font-size: 1rem;
+      font-weight: 900;
+      color: #1e40af;
+      background: #dbeafe;
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 2px solid #bfdbfe;
+    }
+
+    /* テンキーエリア */
+    .keypad-container {
+      background: #f1f5f9;
+      border: 3px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .key-btn {
+      height: 68px;
+      font-size: 2rem;
+      font-weight: 900;
+      font-family: inherit;
+      border-radius: 18px;
+      border: 2px solid #cbd5e1;
+      background: #ffffff;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 0 #94a3b8;
+      transition: all 0.1s ease;
+    }
+
+    .key-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #94a3b8;
+      background: #f8fafc;
+    }
+
+    .key-btn.action-delete {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #b91c1c;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 0 #f87171;
+    }
+
+    .key-btn.action-delete:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #f87171;
+    }
+
+    .key-btn.action-submit {
+      background: #16a34a;
+      border-color: #15803d;
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 900;
+      box-shadow: 0 4px 0 #166534;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .key-btn.action-submit:hover {
+      background: #22c55e;
+    }
+
+    .key-btn.action-submit:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #166534;
+    }
+
+    /* 花丸大正解モーダル */
+    .hanamaru-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      animation: fadeIn 0.3s forwards;
+    }
+
+    .hanamaru-modal-overlay.show {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .hanamaru-modal-card {
+      background: white;
+      border-radius: 34px;
+      padding: 32px 24px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+      border: 6px solid #fbbf24;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: scalePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes scalePop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .hanamaru-svg-box {
+      width: 190px;
+      height: 190px;
+      margin-bottom: 16px;
+      animation: rotateHanamaru 1s ease-out;
+    }
+
+    @keyframes rotateHanamaru {
+      0% { transform: scale(0.2) rotate(-60deg); opacity: 0; }
+      70% { transform: scale(1.15) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .hanamaru-text-main {
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #dc2626;
+      margin-bottom: 10px;
+    }
+
+    .hanamaru-text-sub {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .btn-next-question {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      border: none;
+      padding: 16px 38px;
+      font-size: 1.45rem;
+      font-weight: 900;
+      border-radius: 22px;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #b45309;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+
+    .btn-next-question:hover {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    }
+
+    .btn-next-question:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #b45309;
+    }
+
+    /* 隠し要素 */
+    #fileInput {
+      display: none;
+    }
+
+    /* フッター */
+    footer {
+      padding: 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- ヘッダー -->
+    <header>
+      <div class="app-title-group">
+        <div class="app-icon">📏</div>
+        <div>
+          <h1 class="app-title">ながさを はかろう！</h1>
+          <div class="app-subtitle">特別支援学校 中学部段階2「長さ（cmとmm）」</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btnSoundToggle" class="btn-sound-toggle" title="音声のON/OFF">
+          <span id="soundIcon">🔊</span>
+          <span id="soundStatusText">こえ：ON</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- モード選択タブ -->
+    <div class="mode-selector">
+      <button id="btnModeAssist" class="mode-tab-btn assist-mode active" title="てだすけ ありモード">
+        <span>✨【てだすけ あり】</span>
+        <span class="mode-badge">れんしゅう</span>
+      </button>
+      <button id="btnModeChallenge" class="mode-tab-btn challenge-mode" title="てだすけ なしモード">
+        <span>🔥【てだすけ なし】</span>
+        <span class="mode-badge">チャレンジ</span>
+      </button>
+    </div>
+
+    <!-- 難波先生キャラクター & 吹き出し -->
+    <div class="teacher-section">
+      <div class="teacher-avatar-container">
+        <!-- 難波先生 SVG -->
+        <svg id="teacherSvg" class="teacher-avatar-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#fef08a" stroke="#f59e0b" stroke-width="4"/>
+          <!-- 髪の毛 -->
+          <path d="M 22 45 C 20 20, 80 20, 78 45 C 75 30, 25 30, 22 45 Z" fill="#475569"/>
+          <!-- 顔 -->
+          <ellipse cx="50" cy="55" rx="30" ry="28" fill="#fed7aa"/>
+          <!-- まゆげ -->
+          <path id="eyebrowL" d="M 32 44 Q 40 40 45 44" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path id="eyebrowR" d="M 55 44 Q 60 40 68 44" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <!-- 目 -->
+          <circle id="eyeL" cx="38" cy="52" r="4" fill="#1e293b"/>
+          <circle id="eyeR" cx="62" cy="52" r="4" fill="#1e293b"/>
+          <!-- ほっぺ -->
+          <ellipse cx="30" cy="60" rx="5" ry="3" fill="#fca5a5" opacity="0.8"/>
+          <ellipse cx="70" cy="60" rx="5" ry="3" fill="#fca5a5" opacity="0.8"/>
+          <!-- メガネ -->
+          <circle cx="38" cy="52" r="10" stroke="#3b82f6" stroke-width="2.5" fill="none"/>
+          <circle cx="62" cy="52" r="10" stroke="#3b82f6" stroke-width="2.5" fill="none"/>
+          <line x1="48" y1="52" x2="52" y2="52" stroke="#3b82f6" stroke-width="2.5"/>
+          <!-- 口 -->
+          <path id="teacherMouth" d="M 44 68 Q 50 74 56 68" stroke="#dc2626" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div class="teacher-name-tag">なんばせんせい</div>
+      </div>
+
+      <div class="speech-bubble">
+        <div id="speechText" class="speech-text">
+          こんにちは！ なんばせんせい だよ。<br>ものの ながさを 定規（じょうぎ）で はかってみよう！
+        </div>
+        <div class="speech-actions">
+          <button id="btnReplayVoice" class="btn-replay-voice">
+            <span>🗣️</span> もういちど きく
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="main-content">
+
+      <!-- 操作ツールバー -->
+      <div class="control-toolbar">
+        <div class="preset-group">
+          <span class="toolbar-label">もんだい：</span>
+          <button class="preset-btn active" data-preset="pencil">✏️ えんぴつ</button>
+          <button class="preset-btn" data-preset="eraser">🧼 けしごむ</button>
+          <button class="preset-btn" data-preset="clip">📎 クリップ</button>
+          <button class="preset-btn" data-preset="glue">🧴 のり</button>
+          <button class="preset-btn" data-preset="fork">🍴 フォーク</button>
+        </div>
+
+        <div class="photo-btn-group">
+          <button id="btnUploadPhoto" class="btn-action-tool" title="写真をとる/選ぶ">
+            <span>📷</span> 写真をとる / えらぶ
+          </button>
+          <input type="file" id="fileInput" accept="image/*" capture="environment">
+        </div>
+      </div>
+
+      <!-- 計測ステージ -->
+      <div class="stage-wrapper">
+        
+        <!-- 【てだすけ あり】専用：アニメーションバー -->
+        <div id="assistAnimBar" class="assist-anim-bar">
+          <div class="assist-guide-text">
+            <span>💡</span>
+            <span id="assistGuideMessage">測りたい場所（物の右端）をタップすると拡大するよ！</span>
+          </div>
+          <button id="btnStartAnim" class="btn-start-anim">
+            <span>▶️</span> アニメーション スタート
+          </button>
+        </div>
+
+        <!-- 計測キャンバスエリア -->
+        <div id="stageCanvasArea" class="stage-canvas-area" title="タップして拡大">
+          <!-- メインSVG -->
+          <svg id="mainStageSvg" class="stage-svg" viewBox="0 0 840 200">
+            <defs>
+              <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+                <feDropShadow dx="2" dy="3" stdDeviation="2" flood-opacity="0.25"/>
+              </filter>
+              <!-- 0cm基準矢印マーカー -->
+              <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+              </marker>
+            </defs>
+
+            <!-- 0cm基準線ガイド（左端合わせの視覚支援） -->
+            <line x1="40" y1="10" x2="40" y2="185" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,4"/>
+            <text x="36" y="24" font-size="12" font-weight="900" fill="#2563eb" text-anchor="end">0に合わせる</text>
+
+            <!-- 定規の背景木目/プラスチック風 -->
+            <g id="rulerGroup" transform="translate(40, 90)">
+              <!-- 定規本体 0cm〜15cm (1cm = 48px, 15cm = 720px) -->
+              <rect x="0" y="0" width="760" height="90" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2" filter="url(#shadow)"/>
+              
+              <!-- 定規の目盛りグループ -->
+              <g id="rulerTicks"></g>
+              <!-- cmの数字ハイライト用グループ -->
+              <g id="cmHighlightOverlay"></g>
+              <!-- mm目盛りハイライト用グループ -->
+              <g id="mmHighlightOverlay"></g>
+            </g>
+
+            <!-- 測定物グループ (0cm位置 X=40 に左端を合わせて配置) -->
+            <g id="objectGroup" transform="translate(40, 15)"></g>
+
+            <!-- アニメーション用レイヤー -->
+            <g id="animationLayer" transform="translate(40, 0)">
+              <!-- cm基準線 -->
+              <line id="animCmLine" x1="0" y1="20" x2="0" y2="180" stroke="#dc2626" stroke-width="4.5" stroke-linecap="round" style="display:none;"/>
+              <rect id="animCmLabelBg" x="-28" y="2" width="56" height="26" rx="6" fill="#dc2626" style="display:none;"/>
+              <text id="animCmLabel" x="0" y="20" font-size="16" font-weight="900" fill="white" text-anchor="middle" style="display:none;">0cm</text>
+              
+              <!-- mmカウントアップ線グループ -->
+              <g id="animMmLinesGroup"></g>
+
+              <!-- 停止時の目標マーカー線 -->
+              <line id="animTargetLine" x1="0" y1="20" x2="0" y2="180" stroke="#2563eb" stroke-width="3.5" stroke-dasharray="6,4" style="display:none;"/>
+            </g>
+          </svg>
+
+          <!-- ルーペ拡大鏡（虫眼鏡） -->
+          <div id="loupeOverlay" class="loupe-overlay">
+            <button id="btnLoupeClose" class="loupe-close-btn" title="とじる">✕</button>
+            <div id="loupeContent" class="loupe-content">
+              <!-- ルーペ内クローンSVGがここに入る -->
+            </div>
+            <div class="loupe-crosshair"></div>
+            <div class="loupe-tag">ズーム中🔍</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 下部操作パネル：穴埋め解答 ＋ テンキー -->
+      <div class="interaction-panel">
+        
+        <!-- 穴埋め解答カード -->
+        <div class="answer-card">
+          <div class="answer-title">
+            <span>✏️</span> ながさを こたえよう！
+          </div>
+
+          <div class="answer-boxes-container">
+            <!-- cm入力スロット -->
+            <div class="answer-slot-group">
+              <div id="boxCm" class="answer-box active" title="cmを入力"></div>
+              <span class="unit-label">cm</span>
+            </div>
+
+            <!-- mm入力スロット -->
+            <div class="answer-slot-group">
+              <div id="boxMm" class="answer-box" title="mmを入力"></div>
+              <span class="unit-label">mm</span>
+            </div>
+          </div>
+
+          <div id="inputIndicatorText" class="input-indicator-text">
+            いま「cm」を いれているよ（大きい線）
+          </div>
+        </div>
+
+        <!-- テンキー -->
+        <div class="keypad-container">
+          <div class="keypad-grid">
+            <button class="key-btn" data-key="1">1</button>
+            <button class="key-btn" data-key="2">2</button>
+            <button class="key-btn" data-key="3">3</button>
+
+            <button class="key-btn" data-key="4">4</button>
+            <button class="key-btn" data-key="5">5</button>
+            <button class="key-btn" data-key="6">6</button>
+
+            <button class="key-btn" data-key="7">7</button>
+            <button class="key-btn" data-key="8">8</button>
+            <button class="key-btn" data-key="9">9</button>
+
+            <button class="key-btn action-delete" data-key="backspace">⌫ けす</button>
+            <button class="key-btn" data-key="0">0</button>
+            <button id="btnSubmitAnswer" class="key-btn action-submit" data-key="enter">できた！ ✅</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- フッター -->
+    <footer>
+      特別支援学校 算数・数学科 教材用Webアプリ | 中学部 段階2「長さ（cmとmm）」
+    </footer>
+  </div>
+
+  <!-- 正解！花丸モーダル -->
+  <div id="hanamaruModal" class="hanamaru-modal-overlay">
+    <div class="hanamaru-modal-card">
+      <div class="hanamaru-svg-box">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#dc2626" stroke-width="4.5"/>
+          <circle cx="50" cy="50" r="32" fill="none" stroke="#dc2626" stroke-width="3"/>
+          <g fill="#f87171" opacity="0.9">
+            <circle cx="50" cy="8" r="7"/>
+            <circle cx="75" cy="16" r="7"/>
+            <circle cx="91" cy="38" r="7"/>
+            <circle cx="89" cy="65" r="7"/>
+            <circle cx="72" cy="86" r="7"/>
+            <circle cx="50" cy="92" r="7"/>
+            <circle cx="28" cy="86" r="7"/>
+            <circle cx="11" cy="65" r="7"/>
+            <circle cx="9" cy="38" r="7"/>
+            <circle cx="25" cy="16" r="7"/>
+          </g>
+          <text x="50" y="58" font-size="24" font-weight="900" fill="#dc2626" text-anchor="middle">たいへん<br>よくできました</text>
+        </svg>
+      </div>
+      <div class="hanamaru-text-main">だいせいかい！💮</div>
+      <div id="hanamaruFeedbackText" class="hanamaru-text-sub">
+        すごーい！しっかり はかれたね！
+      </div>
+      <button id="btnNextQuestion" class="btn-next-question">
+        <span>➡️</span> つぎの もんだいへ！
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    /**
+     * アプリケーションの全体状態管理
+     */
+    const STATE = {
+      mode: 'assist', // 'assist' | 'challenge'
+      soundEnabled: true,
+      currentSlot: 'cm', // 'cm' | 'mm'
+      inputCm: '',
+      inputMm: '',
+      currentPresetKey: 'pencil',
+      currentProblem: null,
+      isAnimating: false,
+      loupeActive: false,
+      PIXELS_PER_CM: 48,
+      RULER_ORIGIN_X: 40,
+    };
+
+    /**
+     * プリセット問題データ
+     */
+    const PRESETS = {
+      pencil: {
+        id: 'pencil',
+        name: 'えんぴつ',
+        targetCm: 7,
+        targetMm: 4,
+        description: 'あかい えんぴつ',
+        render: (widthPx) => `
+          <g filter="url(#shadow)">
+            <rect x="0" y="24" width="${widthPx - 38}" height="28" rx="3" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+            <line x1="0" y1="33" x2="${widthPx - 38}" y2="33" stroke="#fca5a5" stroke-width="2"/>
+            <line x1="0" y1="43" x2="${widthPx - 38}" y2="43" stroke="#991b1b" stroke-width="2"/>
+            <polygon points="${widthPx - 38},24 ${widthPx},38 ${widthPx - 38},52" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+            <polygon points="${widthPx - 14},33 ${widthPx},38 ${widthPx - 14},43" fill="#1e293b"/>
+            <rect x="0" y="22" width="16" height="32" rx="2" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+            <rect x="0" y="24" width="8" height="28" rx="2" fill="#f43f5e"/>
+          </g>
+        `
+      },
+      eraser: {
+        id: 'eraser',
+        name: 'けしごむ',
+        targetCm: 4,
+        targetMm: 2,
+        description: 'あおの けしごむ',
+        render: (widthPx) => `
+          <g filter="url(#shadow)">
+            <rect x="0" y="16" width="${widthPx}" height="44" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+            <rect x="0" y="14" width="${widthPx * 0.72}" height="48" rx="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+            <rect x="4" y="26" width="${widthPx * 0.72 - 8}" height="14" fill="#ffffff" rx="3"/>
+            <text x="${(widthPx * 0.72) / 2}" y="37" font-size="11" font-weight="900" fill="#2563eb" text-anchor="middle">ERASER</text>
+          </g>
+        `
+      },
+      clip: {
+        id: 'clip',
+        name: 'クリップ',
+        targetCm: 3,
+        targetMm: 5,
+        description: 'ゼムクリップ',
+        render: (widthPx) => `
+          <g filter="url(#shadow)">
+            <path d="
+              M 10 38
+              L ${widthPx - 14} 38
+              A 14 14 0 0 1 ${widthPx - 14} 64
+              L 16 64
+              A 12 12 0 0 1 16 26
+              L ${widthPx - 24} 26
+              A 9 9 0 0 1 ${widthPx - 24} 46
+              L 26 46
+            " fill="none" stroke="#0284c7" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        `
+      },
+      glue: {
+        id: 'glue',
+        name: 'スティックのり',
+        targetCm: 8,
+        targetMm: 7,
+        description: 'スティックのり',
+        render: (widthPx) => `
+          <g filter="url(#shadow)">
+            <rect x="0" y="24" width="24" height="34" rx="4" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+            <rect x="22" y="22" width="${widthPx - 58}" height="38" rx="4" fill="#10b981" stroke="#059669" stroke-width="2"/>
+            <text x="${22 + (widthPx - 58) / 2}" y="46" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">GLUE STICK</text>
+            <rect x="${widthPx - 38}" y="18" width="38" height="46" rx="6" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+          </g>
+        `
+      },
+      fork: {
+        id: 'fork',
+        name: 'フォーク',
+        targetCm: 12,
+        targetMm: 3,
+        description: 'ステンレスの フォーク',
+        render: (widthPx) => `
+          <g filter="url(#shadow)">
+            <path d="M 0 37 Q ${widthPx * 0.3} 33, ${widthPx * 0.65} 36 L ${widthPx * 0.65} 44 Q ${widthPx * 0.3} 47, 0 43 Z" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+            <path d="M ${widthPx * 0.65} 35 Q ${widthPx * 0.75} 25, ${widthPx} 22 L ${widthPx} 28 Q ${widthPx * 0.77} 36, ${widthPx} 36 L ${widthPx} 42 Q ${widthPx * 0.77} 43, ${widthPx} 52 L ${widthPx * 0.75} 55 Q ${widthPx * 0.65} 45, ${widthPx * 0.65} 35 Z" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
+          </g>
+        `
+      }
+    };
+
+    /**
+     * Web Audio API 音声効果音エンジン
+     */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playTone(freq, type = 'sine', duration = 0.15, gainVal = 0.25) {
+        if (!STATE.soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+
+        gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + duration);
+      }
+
+      playKeyTap() {
+        this.playTone(480, 'sine', 0.08, 0.2);
+      }
+
+      playCountTick(pitch = 600) {
+        this.playTone(pitch, 'triangle', 0.09, 0.25);
+      }
+
+      playOshii() {
+        if (!STATE.soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(200, now + 0.35);
+
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(now + 0.35);
+      }
+
+      playFanfare() {
+        if (!STATE.soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const notes = [
+          { f: 523.25, time: 0, d: 0.18 },
+          { f: 659.25, time: 0.16, d: 0.18 },
+          { f: 783.99, time: 0.32, d: 0.22 },
+          { f: 1046.50, time: 0.52, d: 0.75 },
+          { f: 1318.51, time: 0.54, d: 0.75 }
+        ];
+
+        notes.forEach(n => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(n.f, this.ctx.currentTime + n.time);
+
+          gain.gain.setValueAtTime(0.3, this.ctx.currentTime + n.time);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + n.time + n.d);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(this.ctx.currentTime + n.time);
+          osc.stop(this.ctx.currentTime + n.time + n.d);
+        });
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    /**
+     * Web Speech API (音声読み上げ)
+     */
+    function speakTeacher(text) {
+      if (!STATE.soundEnabled) return;
+      if (!('speechSynthesis' in window)) return;
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      utterance.rate = 0.92;
+      utterance.pitch = 1.15;
+
+      const mouth = document.getElementById('teacherMouth');
+      utterance.onstart = () => {
+        if (mouth) mouth.setAttribute('d', 'M 42 66 Q 50 82 58 66');
+      };
+      utterance.onend = () => {
+        if (mouth) mouth.setAttribute('d', 'M 44 68 Q 50 74 56 68');
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function updateTeacherSpeech(message, speakNow = true) {
+      const speechElem = document.getElementById('speechText');
+      if (speechElem) {
+        speechElem.innerHTML = message;
+      }
+      if (speakNow) {
+        const plainText = message.replace(/<[^>]*>/g, '');
+        speakTeacher(plainText);
+      }
+    }
+
+    /**
+     * 定規の目盛り描画
+     */
+    function renderRulerTicks() {
+      const ticksGroup = document.getElementById('rulerTicks');
+      ticksGroup.innerHTML = '';
+
+      const totalCm = 15;
+      const pxPerCm = STATE.PIXELS_PER_CM;
+
+      for (let cm = 0; cm <= totalCm; cm++) {
+        const cmX = cm * pxPerCm;
+
+        // cmの大目盛り線
+        const cmLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        cmLine.setAttribute('x1', cmX);
+        cmLine.setAttribute('y1', 0);
+        cmLine.setAttribute('x2', cmX);
+        cmLine.setAttribute('y2', 36);
+        cmLine.setAttribute('stroke', '#0f172a');
+        cmLine.setAttribute('stroke-width', '2.8');
+        ticksGroup.appendChild(cmLine);
+
+        // cmの数字ラベル
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', cmX);
+        text.setAttribute('y', 60);
+        text.setAttribute('font-size', '20');
+        text.setAttribute('font-weight', '900');
+        text.setAttribute('fill', '#0f172a');
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('id', `cmText_${cm}`);
+        text.textContent = cm;
+        ticksGroup.appendChild(text);
+
+        // 1mm〜9mmの目盛り線
+        if (cm < totalCm) {
+          for (let mm = 1; mm <= 9; mm++) {
+            const mmX = cmX + (mm * (pxPerCm / 10));
+            const is5mm = (mm === 5);
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', mmX);
+            line.setAttribute('y1', 0);
+            line.setAttribute('x2', mmX);
+            line.setAttribute('y2', is5mm ? 25 : 16);
+            line.setAttribute('stroke', is5mm ? '#334155' : '#64748b');
+            line.setAttribute('stroke-width', is5mm ? '2.2' : '1.3');
+            line.setAttribute('id', `mmTick_${cm}_${mm}`);
+            ticksGroup.appendChild(line);
+          }
+        }
+      }
+    }
+
+    /**
+     * 問題の読み込み・セット
+     */
+    function loadProblem(presetKey) {
+      STATE.currentPresetKey = presetKey;
+      const p = PRESETS[presetKey];
+      STATE.currentProblem = p;
+
+      STATE.inputCm = '';
+      STATE.inputMm = '';
+      STATE.currentSlot = 'cm';
+      updateAnswerBoxes();
+      clearHighlights();
+      resetAnimationLayer();
+      hideLoupe();
+
+      const objGroup = document.getElementById('objectGroup');
+      const widthPx = (p.targetCm * STATE.PIXELS_PER_CM) + (p.targetMm * (STATE.PIXELS_PER_CM / 10));
+      objGroup.innerHTML = p.render(widthPx);
+
+      if (STATE.mode === 'assist') {
+        updateTeacherSpeech(`「${p.name}」の ながさを はかろう！<br>みぎはしを タッチして 拡大したり、「アニメーション スタート」をおしてね！`);
+        document.getElementById('assistGuideMessage').textContent = '測りたい場所（物の右端）をタップすると拡大するよ！';
+      } else {
+        updateTeacherSpeech(`「${p.name}」の ながさを はかろう！<br>じぶんの 目で 定規を 見て、なんcm なんmmか 答えてみよう！`);
+      }
+
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.preset === presetKey);
+      });
+    }
+
+    /**
+     * 解答スロット枠の更新
+     */
+    function updateAnswerBoxes() {
+      const boxCm = document.getElementById('boxCm');
+      const boxMm = document.getElementById('boxMm');
+      const indicator = document.getElementById('inputIndicatorText');
+
+      boxCm.textContent = STATE.inputCm;
+      boxMm.textContent = STATE.inputMm;
+
+      boxCm.classList.toggle('active', STATE.currentSlot === 'cm');
+      boxMm.classList.toggle('active', STATE.currentSlot === 'mm');
+
+      if (STATE.currentSlot === 'cm') {
+        indicator.textContent = 'いま「cm」を いれているよ（大きい線）';
+      } else {
+        indicator.textContent = 'いま「mm」を いれているよ（小さい線）';
+      }
+    }
+
+    /**
+     * ハイライト（cm / mm）のクリア
+     */
+    function clearHighlights() {
+      const cmOverlay = document.getElementById('cmHighlightOverlay');
+      const mmOverlay = document.getElementById('mmHighlightOverlay');
+      cmOverlay.innerHTML = '';
+      mmOverlay.innerHTML = '';
+
+      const boxCm = document.getElementById('boxCm');
+      const boxMm = document.getElementById('boxMm');
+      boxCm.classList.remove('highlight-error');
+      boxMm.classList.remove('highlight-error');
+    }
+
+    /**
+     * cmの間違い時のハイライト演出
+     * 「定規のcm数字付近をハイライト」
+     */
+    function highlightCmHint() {
+      clearHighlights();
+      const p = STATE.currentProblem;
+      const targetCm = p.targetCm;
+      const cmOverlay = document.getElementById('cmHighlightOverlay');
+      const pxPerCm = STATE.PIXELS_PER_CM;
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', targetCm * pxPerCm);
+      circle.setAttribute('cy', 56);
+      circle.setAttribute('r', 25);
+      circle.setAttribute('fill', 'rgba(250, 204, 21, 0.45)');
+      circle.setAttribute('stroke', '#dc2626');
+      circle.setAttribute('stroke-width', '4');
+      circle.setAttribute('class', 'highlight-cm-area');
+      cmOverlay.appendChild(circle);
+
+      document.getElementById('boxCm').classList.add('highlight-error');
+      STATE.currentSlot = 'cm';
+      updateAnswerBoxes();
+    }
+
+    /**
+     * mmの間違い時のハイライト演出
+     * 「mm目盛り線をハイライト」
+     */
+    function highlightMmHint() {
+      clearHighlights();
+      const p = STATE.currentProblem;
+      const targetCm = p.targetCm;
+      const targetMm = p.targetMm;
+      const mmOverlay = document.getElementById('mmHighlightOverlay');
+      const pxPerCm = STATE.PIXELS_PER_CM;
+
+      const startX = targetCm * pxPerCm;
+
+      for (let mm = 1; mm <= targetMm; mm++) {
+        const mmX = startX + (mm * (pxPerCm / 10));
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', mmX);
+        line.setAttribute('y1', 0);
+        line.setAttribute('x2', mmX);
+        line.setAttribute('y2', 34);
+        line.setAttribute('stroke', '#dc2626');
+        line.setAttribute('stroke-width', '4.5');
+        line.setAttribute('class', 'highlight-mm-area');
+        mmOverlay.appendChild(line);
+
+        const num = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        num.setAttribute('x', mmX);
+        num.setAttribute('y', -6);
+        num.setAttribute('font-size', '14');
+        num.setAttribute('font-weight', '900');
+        num.setAttribute('fill', '#dc2626');
+        num.setAttribute('text-anchor', 'middle');
+        num.textContent = mm;
+        mmOverlay.appendChild(num);
+      }
+
+      document.getElementById('boxMm').classList.add('highlight-error');
+      STATE.currentSlot = 'mm';
+      updateAnswerBoxes();
+    }
+
+    /**
+     * 採点処理
+     */
+    function checkAnswer() {
+      const p = STATE.currentProblem;
+      if (!p) return;
+
+      const userCm = parseInt(STATE.inputCm, 10);
+      const userMm = parseInt(STATE.inputMm, 10);
+
+      if (isNaN(userCm) || isNaN(userMm)) {
+        sound.playOshii();
+        updateTeacherSpeech('すうじ を「cm」と「mm」の 両方に いれてみよう！');
+        if (isNaN(userCm)) {
+          STATE.currentSlot = 'cm';
+        } else {
+          STATE.currentSlot = 'mm';
+        }
+        updateAnswerBoxes();
+        return;
+      }
+
+      const isCmCorrect = (userCm === p.targetCm);
+      const isMmCorrect = (userMm === p.targetMm);
+
+      if (isCmCorrect && isMmCorrect) {
+        clearHighlights();
+        sound.playFanfare();
+        const successMsg = `すごーい！しっかり はかれたね！ ${p.targetCm}cm ${p.targetMm}mm だね。はなまる！`;
+        updateTeacherSpeech(successMsg);
+        showHanamaruModal(successMsg);
+
+      } else if (!isCmCorrect) {
+        sound.playOshii();
+        highlightCmHint();
+        updateTeacherSpeech('おしい！ 大きい 線の すうじ（cm）を もういちど 見てみよう。もう一度 答えてみよう！');
+
+      } else {
+        sound.playOshii();
+        highlightMmHint();
+        updateTeacherSpeech('おしい！ 小さい 線（mm）を 1、2、3… と 数えてみよう。もう一度 答えてみよう！');
+      }
+    }
+
+    function showHanamaruModal(message) {
+      const modal = document.getElementById('hanamaruModal');
+      const textElem = document.getElementById('hanamaruFeedbackText');
+      textElem.textContent = message;
+      modal.classList.add('show');
+    }
+
+    function hideHanamaruModal() {
+      const modal = document.getElementById('hanamaruModal');
+      modal.classList.remove('show');
+    }
+
+    function goToNextProblem() {
+      hideHanamaruModal();
+      const keys = Object.keys(PRESETS);
+      const currentIndex = keys.indexOf(STATE.currentPresetKey);
+      const nextIndex = (currentIndex + 1) % keys.length;
+      loadProblem(keys[nextIndex]);
+    }
+
+    function resetAnimationLayer() {
+      STATE.isAnimating = false;
+      const btn = document.getElementById('btnStartAnim');
+      if (btn) btn.disabled = false;
+
+      document.getElementById('animCmLine').style.display = 'none';
+      document.getElementById('animCmLabelBg').style.display = 'none';
+      document.getElementById('animCmLabel').style.display = 'none';
+      document.getElementById('animMmLinesGroup').innerHTML = '';
+      const targetLine = document.getElementById('animTargetLine');
+      targetLine.style.display = 'none';
+      targetLine.classList.remove('target-line-blink');
+    }
+
+    /**
+     * 【てだすけ あり】目盛りアニメーション
+     */
+    async function runGuideAnimation() {
+      if (STATE.isAnimating) return;
+      STATE.isAnimating = true;
+
+      const btn = document.getElementById('btnStartAnim');
+      btn.disabled = true;
+      clearHighlights();
+      resetAnimationLayer();
+
+      const p = STATE.currentProblem;
+      const targetCm = p.targetCm;
+      const targetMm = p.targetMm;
+      const pxPerCm = STATE.PIXELS_PER_CM;
+
+      // 1. cmの基準線表示: 太い赤色の基準線を表示
+      updateTeacherSpeech(`まず、大きい 線の ${targetCm}cm を 見るよ！`);
+      sound.playCountTick(440);
+
+      const cmX = targetCm * pxPerCm;
+      const cmLine = document.getElementById('animCmLine');
+      const cmBg = document.getElementById('animCmLabelBg');
+      const cmLabel = document.getElementById('animCmLabel');
+
+      cmLine.setAttribute('x1', cmX);
+      cmLine.setAttribute('x2', cmX);
+      cmLine.style.display = 'block';
+
+      cmBg.setAttribute('x', cmX - 28);
+      cmBg.style.display = 'block';
+
+      cmLabel.setAttribute('x', cmX);
+      cmLabel.textContent = `${targetCm}cm`;
+      cmLabel.style.display = 'block';
+
+      await sleep(1200);
+
+      // 2. mmのカウントアップ: 「10cm1mm」「10cm2mm」…と、1mmごとに1本ずつ細い赤線が入る
+      const mmGroup = document.getElementById('animMmLinesGroup');
+
+      if (targetMm > 0) {
+        updateTeacherSpeech(`つぎに、小さい 線（mm）を 1、2、3… と 数えるよ！`, false);
+
+        for (let mm = 1; mm <= targetMm; mm++) {
+          await sleep(650);
+          sound.playCountTick(520 + (mm * 35));
+
+          const mmX = cmX + (mm * (pxPerCm / 10));
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', mmX);
+          line.setAttribute('y1', 20);
+          line.setAttribute('x2', mmX);
+          line.setAttribute('y2', 175);
+          line.setAttribute('stroke', '#ea580c');
+          line.setAttribute('stroke-width', '2.5');
+          mmGroup.appendChild(line);
+
+          const countText = `${targetCm}cm ${mm}mm`;
+          document.getElementById('assistGuideMessage').textContent = `👉 ${countText}`;
+          updateTeacherSpeech(`${targetCm}cm ${mm}mm`, false);
+        }
+      }
+
+      await sleep(500);
+
+      // 3. 目的位置で停止: 線が点滅
+      const finalX = cmX + (targetMm * (pxPerCm / 10));
+      const targetLine = document.getElementById('animTargetLine');
+      targetLine.setAttribute('x1', finalX);
+      targetLine.setAttribute('x2', finalX);
+      targetLine.style.display = 'block';
+      targetLine.classList.add('target-line-blink');
+
+      sound.playCountTick(880);
+      const finishMsg = `ここが はしっこ！ ぴったり ${targetCm}cm ${targetMm}mm だね！ 解答欄（かいとうらん）に いれてみよう！`;
+      updateTeacherSpeech(finishMsg);
+      document.getElementById('assistGuideMessage').textContent = `✅ ぴったり ${targetCm}cm ${targetMm}mm！`;
+
+      STATE.isAnimating = false;
+      btn.disabled = false;
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    /**
+     * ルーペ拡大鏡（虫眼鏡）機能
+     */
+    function setupLoupeInteraction() {
+      const stageArea = document.getElementById('stageCanvasArea');
+      const loupe = document.getElementById('loupeOverlay');
+      const closeBtn = document.getElementById('btnLoupeClose');
+
+      let isDragging = false;
+
+      stageArea.addEventListener('pointerdown', (e) => {
+        if (STATE.mode !== 'assist') return;
+        if (e.target === closeBtn) return;
+        sound.init();
+        isDragging = true;
+        showLoupeAtEvent(e);
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isDragging || STATE.mode !== 'assist' || !STATE.loupeActive) return;
+        updateLoupePosition(e);
+      });
+
+      window.addEventListener('pointerup', () => {
+        isDragging = false;
+      });
+
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hideLoupe();
+      });
+    }
+
+    function showLoupeAtEvent(e) {
+      const stageArea = document.getElementById('stageCanvasArea');
+      const loupe = document.getElementById('loupeOverlay');
+      const loupeContent = document.getElementById('loupeContent');
+      const mainSvg = document.getElementById('mainStageSvg');
+
+      STATE.loupeActive = true;
+      loupe.style.display = 'block';
+
+      loupeContent.innerHTML = '';
+      const clone = mainSvg.cloneNode(true);
+      clone.setAttribute('id', 'loupeCloneSvg');
+      loupeContent.appendChild(clone);
+
+      updateLoupePosition(e);
+      sound.playCountTick(650);
+    }
+
+    function updateLoupePosition(e) {
+      const stageArea = document.getElementById('stageCanvasArea');
+      const loupe = document.getElementById('loupeOverlay');
+      const loupeContent = document.getElementById('loupeContent');
+
+      const rect = stageArea.getBoundingClientRect();
+      const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+      const y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+
+      loupe.style.left = `${x}px`;
+      loupe.style.top = `${y}px`;
+
+      const zoom = 2.8;
+      const svgW = rect.width;
+      const svgH = rect.height;
+
+      loupeContent.style.width = `${svgW}px`;
+      loupeContent.style.height = `${svgH}px`;
+      loupeContent.style.transform = `scale(${zoom}) translate(${-x + 95 / zoom}px, ${-y + 95 / zoom}px)`;
+    }
+
+    function hideLoupe() {
+      STATE.loupeActive = false;
+      const loupe = document.getElementById('loupeOverlay');
+      if (loupe) loupe.style.display = 'none';
+    }
+
+    /**
+     * モード切り替え
+     */
+    function switchMode(newMode) {
+      STATE.mode = newMode;
+      const btnAssist = document.getElementById('btnModeAssist');
+      const btnChallenge = document.getElementById('btnModeChallenge');
+      const assistAnimBar = document.getElementById('assistAnimBar');
+
+      clearHighlights();
+      resetAnimationLayer();
+      hideLoupe();
+
+      if (newMode === 'assist') {
+        btnAssist.classList.add('active');
+        btnChallenge.classList.remove('active');
+        assistAnimBar.style.display = 'flex';
+        updateTeacherSpeech('✨【てだすけ あり】モード だよ！<br>測りたい場所を タッチして 拡大したり、アニメーションで 目盛りを かぞえてみよう！');
+      } else {
+        btnChallenge.classList.add('active');
+        btnAssist.classList.remove('active');
+        assistAnimBar.style.display = 'none';
+        updateTeacherSpeech('🔥【てだすけ なし】モード だよ！<br>拡大や ガイドなしで、じぶんの 力で 定規の 目盛りを 読んでみよう！');
+      }
+    }
+
+    /**
+     * テンキー操作の処理
+     */
+    function handleKeyInput(key) {
+      sound.playKeyTap();
+
+      if (key === 'backspace') {
+        if (STATE.currentSlot === 'cm') {
+          STATE.inputCm = STATE.inputCm.slice(0, -1);
+        } else {
+          if (STATE.inputMm.length > 0) {
+            STATE.inputMm = '';
+          } else {
+            STATE.currentSlot = 'cm';
+            STATE.inputCm = STATE.inputCm.slice(0, -1);
+          }
+        }
+      } else if (key === 'enter') {
+        checkAnswer();
+        return;
+      } else {
+        // 数字キー '0'〜'9'
+        if (STATE.currentSlot === 'cm') {
+          if (STATE.inputCm.length < 2) {
+            STATE.inputCm += key;
+            if (parseInt(STATE.inputCm, 10) > 15) {
+              STATE.inputCm = '15';
+            }
+          }
+          // cmを入力したら自動的にmmへフォーカス移行（自然な導線）
+          if (STATE.inputCm.length >= 1) {
+            // 少し待ってからmmへ切り替え
+            setTimeout(() => {
+              if (STATE.inputCm !== '') {
+                STATE.currentSlot = 'mm';
+                updateAnswerBoxes();
+              }
+            }, 300);
+          }
+        } else {
+          // mmは1桁 (0〜9)
+          STATE.inputMm = key;
+        }
+      }
+
+      updateAnswerBoxes();
+    }
+
+    /**
+     * ユーザーの写真読み込み（カメラ / ファイルピッカー）
+     */
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imgUrl = e.target.result;
+
+        // 写真用の問題（6cm 3mm）
+        PRESETS['custom_photo'] = {
+          id: 'custom_photo',
+          name: 'しゃしん',
+          targetCm: 6,
+          targetMm: 3,
+          description: 'さつえいした 写真',
+          render: (widthPx) => `
+            <g filter="url(#shadow)">
+              <rect x="0" y="8" width="${widthPx}" height="68" rx="8" fill="#e2e8f0" stroke="#0284c7" stroke-width="2"/>
+              <image href="${imgUrl}" x="0" y="8" width="${widthPx}" height="68" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoClip)"/>
+              <clipPath id="photoClip">
+                <rect x="0" y="8" width="${widthPx}" height="68" rx="8"/>
+              </clipPath>
+            </g>
+          `
+        };
+
+        loadProblem('custom_photo');
+        updateTeacherSpeech('すてきな 写真が はいったよ！<br>なんcm なんmmか はかってみよう！');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /**
+     * 初期化
+     */
+    function initApp() {
+      renderRulerTicks();
+      loadProblem('pencil');
+      setupLoupeInteraction();
+
+      document.getElementById('btnModeAssist').addEventListener('click', () => switchMode('assist'));
+      document.getElementById('btnModeChallenge').addEventListener('click', () => switchMode('challenge'));
+
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          sound.playKeyTap();
+          loadProblem(e.currentTarget.dataset.preset);
+        });
+      });
+
+      document.getElementById('btnStartAnim').addEventListener('click', () => {
+        runGuideAnimation();
+      });
+
+      document.getElementById('boxCm').addEventListener('click', () => {
+        sound.playKeyTap();
+        STATE.currentSlot = 'cm';
+        updateAnswerBoxes();
+      });
+
+      document.getElementById('boxMm').addEventListener('click', () => {
+        sound.playKeyTap();
+        STATE.currentSlot = 'mm';
+        updateAnswerBoxes();
+      });
+
+      document.querySelectorAll('.key-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const key = e.currentTarget.dataset.key;
+          handleKeyInput(key);
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key >= '0' && e.key <= '9') {
+          handleKeyInput(e.key);
+        } else if (e.key === 'Backspace') {
+          handleKeyInput('backspace');
+        } else if (e.key === 'Enter') {
+          handleKeyInput('enter');
+        } else if (e.key === 'Tab' || e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          STATE.currentSlot = (STATE.currentSlot === 'cm') ? 'mm' : 'cm';
+          updateAnswerBoxes();
+        }
+      });
+
+      document.getElementById('btnReplayVoice').addEventListener('click', () => {
+        const plainText = document.getElementById('speechText').textContent;
+        speakTeacher(plainText);
+      });
+
+      document.getElementById('btnSoundToggle').addEventListener('click', () => {
+        STATE.soundEnabled = !STATE.soundEnabled;
+        const icon = document.getElementById('soundIcon');
+        const text = document.getElementById('soundStatusText');
+        if (STATE.soundEnabled) {
+          icon.textContent = '🔊';
+          text.textContent = 'こえ：ON';
+          sound.init();
+          sound.playKeyTap();
+        } else {
+          icon.textContent = '🔇';
+          text.textContent = 'こえ：OFF';
+          if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+      });
+
+      const fileInput = document.getElementById('fileInput');
+      document.getElementById('btnUploadPhoto').addEventListener('click', () => {
+        sound.init();
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', handlePhotoUpload);
+
+      document.getElementById('btnNextQuestion').addEventListener('click', () => {
+        sound.playKeyTap();
+        goToNextProblem();
+      });
+
+      window.addEventListener('pointerdown', () => {
+        sound.init();
+      }, { once: true });
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
