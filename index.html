@@ -6,22 +6,23 @@
   <title>なんばせんせいと ながさを はかろう！【cmとmm】</title>
   <style>
     :root {
-      --primary-color: #2563eb;
-      --primary-light: #dbeafe;
-      --accent-color: #ea580c;
-      --accent-light: #ffedd5;
+      --primary-color: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent-color: #f97316;
+      --cool-dark: #0f172a;
+      --cool-blue: #1e293b;
       --success-color: #16a34a;
-      --warning-color: #f59e0b;
       --danger-color: #dc2626;
-      --bg-color: #f8fafc;
+      --warning-color: #eab308;
+      --bg-color: #f1f5f9;
       --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
+      --text-main: #0f172a;
+      --text-muted: #475569;
       --border-color: #cbd5e1;
-      --focus-ring: #fbbf24;
       --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
-      --shadow-md: 0 6px 12px -2px rgba(0,0,0,0.1);
-      --shadow-lg: 0 12px 24px -4px rgba(0,0,0,0.15);
+      --shadow-md: 0 6px 16px -2px rgba(15,23,42,0.1);
+      --shadow-lg: 0 16px 32px -4px rgba(15,23,42,0.15);
       --font-family: system-ui, -apple-system, "UD デジタル 教科書体 N-R", "UD Digital Textbook NP-R", "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
     }
 
@@ -47,27 +48,27 @@
 
     .app-container {
       width: 100%;
-      max-width: 1060px;
+      max-width: 1080px;
       background: var(--card-bg);
-      border-radius: 24px;
+      border-radius: 28px;
       box-shadow: var(--shadow-lg);
-      border: 3px solid #e2e8f0;
+      border: 3px solid #cbd5e1;
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
 
-    /* ヘッダーエリア */
+    /* ヘッダー */
     header {
-      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0369a1 100%);
       color: white;
-      padding: 14px 22px;
+      padding: 14px 24px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      border-bottom: 4px solid #1d4ed8;
+      border-bottom: 4px solid #0284c7;
     }
 
     .app-title-group {
@@ -79,25 +80,24 @@
     .app-icon {
       width: 46px;
       height: 46px;
-      background: #fef08a;
-      border-radius: 12px;
+      background: #38bdf8;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 26px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .app-title {
       font-size: 1.45rem;
       font-weight: 900;
-      letter-spacing: 0.05em;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      letter-spacing: 0.04em;
     }
 
     .app-subtitle {
       font-size: 0.85rem;
-      opacity: 0.95;
+      color: #94a3b8;
       font-weight: 700;
     }
 
@@ -108,12 +108,12 @@
     }
 
     .btn-sound-toggle {
-      background: rgba(255,255,255,0.22);
-      border: 2px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.4);
       color: white;
       border-radius: 30px;
       padding: 8px 18px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
       display: flex;
@@ -123,23 +123,23 @@
     }
 
     .btn-sound-toggle:hover {
-      background: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.25);
     }
 
     /* モード選択タブ */
     .mode-selector {
-      background: #eff6ff;
+      background: #f8fafc;
       padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 16px;
-      border-bottom: 2px solid #bfdbfe;
+      border-bottom: 2px solid #e2e8f0;
     }
 
     .mode-tab-btn {
       flex: 1;
-      max-width: 400px;
+      max-width: 420px;
       padding: 12px 18px;
       font-size: 1.2rem;
       font-weight: 900;
@@ -163,50 +163,54 @@
     }
 
     .mode-tab-btn.active.assist-mode {
-      background: #fef3c7;
-      border-color: #f59e0b;
-      color: #92400e;
-      box-shadow: 0 4px 0 #d97706;
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0369a1;
+      box-shadow: 0 4px 0 #0284c7;
     }
 
     .mode-tab-btn.active.challenge-mode {
-      background: #dbeafe;
-      border-color: #2563eb;
-      color: #1e40af;
-      box-shadow: 0 4px 0 #1d4ed8;
+      background: #f1f5f9;
+      border-color: #334155;
+      color: #0f172a;
+      box-shadow: 0 4px 0 #1e293b;
     }
 
     .mode-badge {
       font-size: 0.8rem;
-      background: #dc2626;
+      background: #0284c7;
       color: white;
       padding: 2px 10px;
       border-radius: 20px;
       font-weight: 800;
     }
 
-    /* 難波先生キャラクターエリア */
+    .mode-tab-btn.active.challenge-mode .mode-badge {
+      background: #0f172a;
+    }
+
+    /* 若くてクールな「難波先生」キャラクターエリア */
     .teacher-section {
-      background: #fffbeb;
-      padding: 14px 22px;
+      background: linear-gradient(to right, #f8fafc, #f1f5f9);
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       gap: 20px;
-      border-bottom: 3px solid #fef08a;
+      border-bottom: 3px solid #e2e8f0;
       position: relative;
     }
 
     .teacher-avatar-container {
       flex-shrink: 0;
       position: relative;
-      width: 104px;
-      height: 104px;
+      width: 105px;
+      height: 105px;
     }
 
     .teacher-avatar-svg {
       width: 100%;
       height: 100%;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+      filter: drop-shadow(0 6px 12px rgba(15,23,42,0.18));
     }
 
     .teacher-name-tag {
@@ -214,25 +218,26 @@
       bottom: -6px;
       left: 50%;
       transform: translateX(-50%);
-      background: #ea580c;
-      color: white;
+      background: #0f172a;
+      color: #38bdf8;
+      border: 1.5px solid #38bdf8;
       font-weight: 900;
       font-size: 0.8rem;
       padding: 3px 12px;
       border-radius: 12px;
       white-space: nowrap;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     }
 
     .speech-bubble {
       flex: 1;
       background: white;
-      border: 3px solid #f59e0b;
+      border: 3px solid #0284c7;
       border-radius: 22px;
-      padding: 14px 22px;
+      padding: 16px 24px;
       position: relative;
       box-shadow: var(--shadow-sm);
-      min-height: 84px;
+      min-height: 86px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -246,7 +251,7 @@
       transform: translateY(-50%);
       border-width: 11px 18px 11px 0;
       border-style: solid;
-      border-color: transparent #f59e0b transparent transparent;
+      border-color: transparent #0284c7 transparent transparent;
     }
 
     .speech-bubble::after {
@@ -261,11 +266,11 @@
     }
 
     .speech-text {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 900;
-      line-height: 1.5;
-      color: #78350f;
-      letter-spacing: 0.04em;
+      line-height: 1.55;
+      color: #0f172a;
+      letter-spacing: 0.03em;
     }
 
     .speech-actions {
@@ -276,129 +281,111 @@
     }
 
     .btn-replay-voice {
-      background: #fef3c7;
-      border: 2px solid #f59e0b;
-      color: #92400e;
+      background: #f0f9ff;
+      border: 2px solid #0284c7;
+      color: #0369a1;
       font-size: 0.9rem;
       font-weight: 800;
       border-radius: 14px;
-      padding: 5px 12px;
+      padding: 5px 14px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: all 0.15s;
     }
 
     .btn-replay-voice:hover {
-      background: #fde68a;
+      background: #e0f2fe;
     }
 
     /* メインコンテンツエリア */
     .main-content {
-      padding: 16px 20px;
+      padding: 18px 22px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
-    /* もんだい選択・写真操作バー */
-    .control-toolbar {
+    /* 写真撮影・読み込み操作バー */
+    .photo-control-bar {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      background: #f1f5f9;
-      padding: 10px 16px;
-      border-radius: 16px;
+      gap: 12px;
+      background: #f8fafc;
+      padding: 12px 18px;
+      border-radius: 20px;
       border: 2px solid #e2e8f0;
     }
 
-    .preset-group {
+    .photo-action-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .toolbar-label {
-      font-size: 1rem;
+    .btn-take-photo {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      border: none;
+      padding: 11px 22px;
+      border-radius: 16px;
+      font-size: 1.1rem;
       font-weight: 900;
-      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 0 #075985;
+      transition: all 0.15s;
     }
 
-    .preset-btn {
-      background: white;
-      border: 2px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 7px 14px;
+    .btn-take-photo:hover {
+      background: linear-gradient(135deg, #0369a1, #0284c7);
+    }
+
+    .btn-take-photo:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #075985;
+    }
+
+    .btn-sample-photo {
+      background: #ffffff;
+      border: 2px solid #64748b;
+      color: #334155;
+      padding: 10px 18px;
+      border-radius: 16px;
       font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
-      transition: all 0.15s;
-    }
-
-    .preset-btn:hover {
-      background: #f8fafc;
-      border-color: #94a3b8;
-    }
-
-    .preset-btn.active {
-      background: #eff6ff;
-      border-color: #2563eb;
-      color: #1d4ed8;
-      box-shadow: 0 0 0 2px rgba(37,99,235,0.25);
-    }
-
-    .photo-btn-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-action-tool {
-      background: #ffffff;
-      border: 2px solid #2563eb;
-      color: #1d4ed8;
-      padding: 8px 16px;
-      border-radius: 14px;
-      font-size: 0.95rem;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 0 #93c5fd;
       transition: all 0.15s;
     }
 
-    .btn-action-tool:hover {
-      background: #eff6ff;
+    .btn-sample-photo:hover {
+      background: #f1f5f9;
+      border-color: #0f172a;
     }
 
-    .btn-action-tool:active {
-      transform: translateY(2px);
-      box-shadow: none;
-    }
-
-    /* 計測ステージエリア */
+    /* 計測ステージ・写真エリア */
     .stage-wrapper {
       position: relative;
-      background: #ffffff;
-      border: 3px solid #cbd5e1;
-      border-radius: 22px;
-      padding: 16px;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
+      background: #0f172a;
+      border: 3px solid #334155;
+      border-radius: 24px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      min-height: 290px;
+      min-height: 310px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.4);
     }
 
     /* アニメーション支援コントロール */
@@ -409,179 +396,123 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      background: #fef9c3;
-      border: 2px solid #fde047;
-      border-radius: 16px;
-      padding: 10px 18px;
+      background: #1e293b;
+      border: 2px solid #0284c7;
+      border-radius: 18px;
+      padding: 10px 20px;
     }
 
     .assist-guide-text {
       font-size: 1.05rem;
-      font-weight: 900;
-      color: #854d0e;
+      font-weight: 800;
+      color: #38bdf8;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .btn-start-anim {
-      background: #ea580c;
+    .btn-zoom-anim {
+      background: linear-gradient(135deg, #f97316, #ea580c);
       color: white;
       border: none;
-      padding: 10px 24px;
-      border-radius: 16px;
-      font-size: 1.15rem;
+      padding: 12px 26px;
+      border-radius: 18px;
+      font-size: 1.25rem;
       font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       box-shadow: 0 4px 0 #9a3412;
       transition: all 0.15s;
     }
 
-    .btn-start-anim:hover {
-      background: #f97316;
+    .btn-zoom-anim:hover {
+      background: linear-gradient(135deg, #fb923c, #f97316);
     }
 
-    .btn-start-anim:active {
+    .btn-zoom-anim:active {
       transform: translateY(3px);
       box-shadow: 0 1px 0 #9a3412;
     }
 
-    .btn-start-anim:disabled {
-      background: #cbd5e1;
+    .btn-zoom-anim:disabled {
+      background: #475569;
       color: #94a3b8;
       box-shadow: none;
       cursor: not-allowed;
       transform: none;
     }
 
-    /* ステージグラフィック表示コンテナ */
+    .btn-reset-zoom {
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+    }
+
+    /* ステージグラフィック表示コンテナ（写真＋ものさし＋アニメーション） */
     .stage-canvas-area {
       position: relative;
       width: 100%;
-      max-width: 920px;
-      height: 220px;
-      background: #f8fafc;
-      border: 2px dashed #cbd5e1;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      max-width: 960px;
+      height: 240px;
+      background: #1e293b;
+      border-radius: 20px;
       overflow: hidden;
-      cursor: pointer;
-      touch-action: none;
+      cursor: crosshair;
     }
 
     .stage-svg {
       width: 100%;
       height: 100%;
       display: block;
-    }
-
-    /* ルーペ拡大表示オーバーレイ（虫眼鏡） */
-    .loupe-overlay {
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      border-radius: 50%;
-      border: 5px solid #2563eb;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35), inset 0 0 16px rgba(0,0,0,0.25);
-      background: #ffffff;
-      overflow: hidden;
-      display: none;
-      z-index: 40;
-      transform: translate(-50%, -50%);
-      pointer-events: auto;
-    }
-
-    .loupe-content {
-      position: absolute;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
       transform-origin: 0 0;
-      pointer-events: none;
     }
 
-    .loupe-crosshair {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 16px;
-      height: 16px;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
+    /* ズームアップ時のスタイル */
+    .stage-svg.is-zoomed {
+      /* JSで動的にズーム原点とスケールを設定 */
     }
 
-    .loupe-crosshair::before, .loupe-crosshair::after {
-      content: '';
+    /* ズーム中バッジ表示 */
+    .zoom-indicator-badge {
       position: absolute;
-      background: #dc2626;
-    }
-    .loupe-crosshair::before {
-      top: 0; left: 7px; width: 2px; height: 16px;
-    }
-    .loupe-crosshair::after {
-      top: 7px; left: 0; width: 16px; height: 2px;
-    }
-
-    .loupe-tag {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #2563eb;
+      top: 12px;
+      left: 12px;
+      background: rgba(2, 132, 199, 0.9);
       color: white;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 900;
-      padding: 3px 10px;
-      border-radius: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .loupe-close-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: #dc2626;
-      color: white;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      font-size: 1rem;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
+      padding: 4px 12px;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      display: none;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      z-index: 5;
+      gap: 6px;
+      z-index: 10;
+      backdrop-filter: blur(4px);
     }
 
-    /* ハイライト点滅エフェクト */
-    @keyframes cmPulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 6px #eab308); opacity: 1; }
-      50% { filter: drop-shadow(0 0 16px #ef4444); opacity: 0.6; }
-    }
-
-    @keyframes mmPulseGlow {
-      0%, 100% { stroke: #dc2626; stroke-width: 4; opacity: 1; }
-      50% { stroke: #eab308; stroke-width: 5; opacity: 0.7; }
+    /* 点滅アニメーション */
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 8px #f59e0b); stroke-width: 4.5; }
+      50% { filter: drop-shadow(0 0 20px #ef4444); stroke-width: 6; }
     }
 
     @keyframes lineBlink {
-      0%, 100% { opacity: 1; stroke-width: 4; }
-      50% { opacity: 0.2; stroke-width: 2; }
+      0%, 100% { opacity: 1; stroke-width: 5; }
+      50% { opacity: 0.25; stroke-width: 3; }
     }
 
-    .highlight-cm-area {
-      animation: cmPulseGlow 0.75s infinite;
-    }
-
-    .highlight-mm-area {
-      animation: mmPulseGlow 0.6s infinite;
+    .highlight-cm-pulse {
+      animation: pulseGlow 0.75s infinite;
     }
 
     .target-line-blink {
@@ -592,7 +523,7 @@
     .interaction-panel {
       display: grid;
       grid-template-columns: 1fr 1.15fr;
-      gap: 16px;
+      gap: 18px;
       align-items: start;
     }
 
@@ -605,9 +536,9 @@
     /* 穴埋め解答カード */
     .answer-card {
       background: #ffffff;
-      border: 3px solid #bfdbfe;
-      border-radius: 22px;
-      padding: 20px;
+      border: 3px solid #cbd5e1;
+      border-radius: 24px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -616,9 +547,9 @@
     }
 
     .answer-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 900;
-      color: #1e3a8a;
+      color: #0f172a;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -628,7 +559,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 16px;
       width: 100%;
     }
 
@@ -639,15 +570,15 @@
     }
 
     .answer-box {
-      width: 90px;
-      height: 80px;
+      width: 92px;
+      height: 82px;
       background: #f8fafc;
       border: 4px solid #cbd5e1;
-      border-radius: 18px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 900;
       color: #0f172a;
       cursor: pointer;
@@ -656,9 +587,9 @@
     }
 
     .answer-box.active {
-      border-color: #2563eb;
-      background: #eff6ff;
-      box-shadow: 0 0 0 5px rgba(37,99,235,0.25), inset 0 2px 4px rgba(37,99,235,0.1);
+      border-color: #0284c7;
+      background: #f0f9ff;
+      box-shadow: 0 0 0 5px rgba(2,132,199,0.25), inset 0 2px 4px rgba(2,132,199,0.1);
       transform: scale(1.05);
     }
 
@@ -676,26 +607,26 @@
     }
 
     .unit-label {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 900;
       color: #334155;
     }
 
     .input-indicator-text {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 900;
-      color: #1e40af;
-      background: #dbeafe;
-      padding: 6px 18px;
-      border-radius: 20px;
-      border: 2px solid #bfdbfe;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 6px 20px;
+      border-radius: 24px;
+      border: 2px solid #bae6fd;
     }
 
     /* テンキーエリア */
     .keypad-container {
-      background: #f1f5f9;
+      background: #f8fafc;
       border: 3px solid #e2e8f0;
-      border-radius: 22px;
+      border-radius: 24px;
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -717,7 +648,7 @@
       border-radius: 18px;
       border: 2px solid #cbd5e1;
       background: #ffffff;
-      color: #1e293b;
+      color: #0f172a;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -729,14 +660,14 @@
     .key-btn:active {
       transform: translateY(3px);
       box-shadow: 0 1px 0 #94a3b8;
-      background: #f8fafc;
+      background: #f1f5f9;
     }
 
     .key-btn.action-delete {
       background: #fef2f2;
       border-color: #fca5a5;
       color: #b91c1c;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       box-shadow: 0 4px 0 #f87171;
     }
 
@@ -749,7 +680,7 @@
       background: #16a34a;
       border-color: #15803d;
       color: white;
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       font-weight: 900;
       box-shadow: 0 4px 0 #166534;
       display: flex;
@@ -773,8 +704,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(5px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -793,12 +724,12 @@
 
     .hanamaru-modal-card {
       background: white;
-      border-radius: 34px;
-      padding: 32px 24px;
+      border-radius: 36px;
+      padding: 34px 26px;
       width: 90%;
       max-width: 500px;
       text-align: center;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.4);
       border: 6px solid #fbbf24;
       display: flex;
       flex-direction: column;
@@ -812,8 +743,8 @@
     }
 
     .hanamaru-svg-box {
-      width: 190px;
-      height: 190px;
+      width: 195px;
+      height: 195px;
       margin-bottom: 16px;
       animation: rotateHanamaru 1s ease-out;
     }
@@ -825,7 +756,7 @@
     }
 
     .hanamaru-text-main {
-      font-size: 2.3rem;
+      font-size: 2.4rem;
       font-weight: 900;
       color: #dc2626;
       margin-bottom: 10px;
@@ -834,44 +765,68 @@
     .hanamaru-text-sub {
       font-size: 1.35rem;
       font-weight: 800;
-      color: #1e3a8a;
+      color: #0369a1;
       line-height: 1.5;
       margin-bottom: 24px;
     }
 
-    .btn-next-question {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
+    .btn-next-action {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
       color: white;
       border: none;
-      padding: 16px 38px;
+      padding: 16px 40px;
       font-size: 1.45rem;
       font-weight: 900;
       border-radius: 22px;
       cursor: pointer;
-      box-shadow: 0 5px 0 #b45309;
+      box-shadow: 0 5px 0 #075985;
       display: inline-flex;
       align-items: center;
       gap: 10px;
       transition: all 0.15s;
     }
 
-    .btn-next-question:hover {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    .btn-next-action:hover {
+      background: linear-gradient(135deg, #0369a1, #0284c7);
     }
 
-    .btn-next-question:active {
+    .btn-next-action:active {
       transform: translateY(3px);
-      box-shadow: 0 2px 0 #b45309;
+      box-shadow: 0 2px 0 #075985;
     }
 
-    /* 隠し要素 */
+    /* 長さ手動微調整バー（先生・設定用） */
+    .length-setting-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .length-setting-inputs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .length-select {
+      font-size: 1rem;
+      font-weight: 900;
+      padding: 5px 8px;
+      border-radius: 10px;
+      border: 2px solid #cbd5e1;
+      background: white;
+    }
+
     #fileInput {
       display: none;
     }
 
     /* フッター */
     footer {
-      padding: 12px;
+      padding: 14px;
       text-align: center;
       font-size: 0.9rem;
       color: var(--text-muted);
@@ -887,7 +842,7 @@
       <div class="app-title-group">
         <div class="app-icon">📏</div>
         <div>
-          <h1 class="app-title">ながさを はかろう！</h1>
+          <h1 class="app-title">なんばせんせいと ながさを はかろう！</h1>
           <div class="app-subtitle">特別支援学校 中学部段階2「長さ（cmとmm）」</div>
         </div>
       </div>
@@ -903,50 +858,83 @@
     <div class="mode-selector">
       <button id="btnModeAssist" class="mode-tab-btn assist-mode active" title="てだすけ ありモード">
         <span>✨【てだすけ あり】</span>
-        <span class="mode-badge">れんしゅう</span>
+        <span class="mode-badge">ズーム＆アニメーション</span>
       </button>
       <button id="btnModeChallenge" class="mode-tab-btn challenge-mode" title="てだすけ なしモード">
         <span>🔥【てだすけ なし】</span>
-        <span class="mode-badge">チャレンジ</span>
+        <span class="mode-badge">自力チャレンジ</span>
       </button>
     </div>
 
-    <!-- 難波先生キャラクター & 吹き出し -->
+    <!-- 若くてクールな「難波先生」キャラクター & 吹き出し -->
     <div class="teacher-section">
       <div class="teacher-avatar-container">
-        <!-- 難波先生 SVG -->
+        <!-- 若くてクールな難波先生 SVG -->
         <svg id="teacherSvg" class="teacher-avatar-svg" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="46" fill="#fef08a" stroke="#f59e0b" stroke-width="4"/>
-          <!-- 髪の毛 -->
-          <path d="M 22 45 C 20 20, 80 20, 78 45 C 75 30, 25 30, 22 45 Z" fill="#475569"/>
-          <!-- 顔 -->
-          <ellipse cx="50" cy="55" rx="30" ry="28" fill="#fed7aa"/>
-          <!-- まゆげ -->
-          <path id="eyebrowL" d="M 32 44 Q 40 40 45 44" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <path id="eyebrowR" d="M 55 44 Q 60 40 68 44" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <!-- 目 -->
-          <circle id="eyeL" cx="38" cy="52" r="4" fill="#1e293b"/>
-          <circle id="eyeR" cx="62" cy="52" r="4" fill="#1e293b"/>
-          <!-- ほっぺ -->
-          <ellipse cx="30" cy="60" rx="5" ry="3" fill="#fca5a5" opacity="0.8"/>
-          <ellipse cx="70" cy="60" rx="5" ry="3" fill="#fca5a5" opacity="0.8"/>
-          <!-- メガネ -->
-          <circle cx="38" cy="52" r="10" stroke="#3b82f6" stroke-width="2.5" fill="none"/>
-          <circle cx="62" cy="52" r="10" stroke="#3b82f6" stroke-width="2.5" fill="none"/>
-          <line x1="48" y1="52" x2="52" y2="52" stroke="#3b82f6" stroke-width="2.5"/>
-          <!-- 口 -->
-          <path id="teacherMouth" d="M 44 68 Q 50 74 56 68" stroke="#dc2626" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <defs>
+            <linearGradient id="coolHairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1e293b"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="coolSuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0284c7"/>
+              <stop offset="100%" stop-color="#0369a1"/>
+            </linearGradient>
+          </defs>
+
+          <!-- 背景円 -->
+          <circle cx="50" cy="50" r="47" fill="#0f172a" stroke="#38bdf8" stroke-width="3"/>
+          <circle cx="50" cy="50" r="43" fill="#1e293b"/>
+
+          <!-- スーツ・首・シャツ -->
+          <path d="M 28 88 L 36 68 L 64 68 L 72 88 Z" fill="#ffffff"/>
+          <path d="M 46 68 L 50 88 L 54 68 Z" fill="#0284c7"/> <!-- ネクタイ -->
+          <path d="M 18 92 Q 35 74 42 72 L 40 95 Z" fill="url(#coolSuitGrad)"/>
+          <path d="M 82 92 Q 65 74 58 72 L 60 95 Z" fill="url(#coolSuitGrad)"/>
+
+          <!-- 首 -->
+          <rect x="44" y="60" width="12" height="12" fill="#fed7aa"/>
+
+          <!-- 顔（シュッとした若くてクールな輪郭） -->
+          <path d="M 32 38 Q 32 64 50 68 Q 68 64 68 38 Q 68 28 50 28 Q 32 28 32 38 Z" fill="#fed7aa"/>
+
+          <!-- クールな髪型（シャープな前髪・スタイリッシュ） -->
+          <path d="M 28 40 C 26 20, 74 20, 72 40 C 70 30, 62 23, 50 24 C 38 23, 30 30, 28 40 Z" fill="url(#coolHairGrad)"/>
+          <path d="M 28 36 Q 38 32 46 38 Q 40 28 30 32 Z" fill="#1e293b"/>
+          <path d="M 44 26 Q 54 36 66 34 Q 58 24 46 25 Z" fill="#0f172a"/>
+          <path d="M 60 30 Q 72 38 72 44 Q 74 34 68 28 Z" fill="#1e293b"/>
+
+          <!-- クールな目元・まゆげ -->
+          <path id="teacherEyebrowL" d="M 35 41 Q 42 38 46 41" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path id="teacherEyebrowR" d="M 54 41 Q 58 38 65 41" stroke="#0f172a" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+          <!-- 目（知的な涼しい目元） -->
+          <ellipse id="teacherEyeL" cx="40" cy="46" rx="3.5" ry="3" fill="#0f172a"/>
+          <circle cx="41.5" cy="45" r="1" fill="#ffffff"/>
+          <ellipse id="teacherEyeR" cx="60" cy="46" rx="3.5" ry="3" fill="#0f172a"/>
+          <circle cx="61.5" cy="45" r="1" fill="#ffffff"/>
+
+          <!-- クールな細身メガネフレーム（青緑） -->
+          <rect x="32" y="42" width="16" height="9" rx="3" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+          <rect x="52" y="42" width="16" height="9" rx="3" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+          <line x1="48" y1="46" x2="52" y2="46" stroke="#38bdf8" stroke-width="1.8"/>
+
+          <!-- 鼻 -->
+          <path d="M 50 47 L 49 53 L 51 53" stroke="#d97706" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+
+          <!-- 口（クールな微笑み） -->
+          <path id="teacherMouth" d="M 45 59 Q 50 62 55 59" stroke="#b91c1c" stroke-width="2" stroke-linecap="round" fill="none"/>
         </svg>
-        <div class="teacher-name-tag">なんばせんせい</div>
+        <div class="teacher-name-tag">なんば先生</div>
       </div>
 
       <div class="speech-bubble">
         <div id="speechText" class="speech-text">
-          こんにちは！ なんばせんせい だよ。<br>ものの ながさを 定規（じょうぎ）で はかってみよう！
+          さあ、ものさしで ものの ながさを はかってみよう。<br>写真を撮るか、見本写真で スタートしよう！
         </div>
         <div class="speech-actions">
           <button id="btnReplayVoice" class="btn-replay-voice">
-            <span>🗣️</span> もういちど きく
+            <span>🗣️</span> もういちど 聞く
           </button>
         </div>
       </div>
@@ -955,97 +943,110 @@
     <!-- メインコンテンツ -->
     <div class="main-content">
 
-      <!-- 操作ツールバー -->
-      <div class="control-toolbar">
-        <div class="preset-group">
-          <span class="toolbar-label">もんだい：</span>
-          <button class="preset-btn active" data-preset="pencil">✏️ えんぴつ</button>
-          <button class="preset-btn" data-preset="eraser">🧼 けしごむ</button>
-          <button class="preset-btn" data-preset="clip">📎 クリップ</button>
-          <button class="preset-btn" data-preset="glue">🧴 のり</button>
-          <button class="preset-btn" data-preset="fork">🍴 フォーク</button>
-        </div>
-
-        <div class="photo-btn-group">
-          <button id="btnUploadPhoto" class="btn-action-tool" title="写真をとる/選ぶ">
-            <span>📷</span> 写真をとる / えらぶ
+      <!-- 写真操作バー -->
+      <div class="photo-control-bar">
+        <div class="photo-action-left">
+          <button id="btnTakePhoto" class="btn-take-photo" title="ものさしと物の写真を撮る">
+            <span>📷</span> ものさしと 写真をとる / えらぶ
           </button>
           <input type="file" id="fileInput" accept="image/*" capture="environment">
+
+          <button id="btnSamplePhoto1" class="btn-sample-photo" data-cm="7" data-mm="4">
+            <span>📸</span> 見本写真① (ペン 7cm4mm)
+          </button>
+          <button id="btnSamplePhoto2" class="btn-sample-photo" data-cm="4" data-mm="2">
+            <span>📸</span> 見本写真② (消しゴム 4cm2mm)
+          </button>
+        </div>
+
+        <!-- 先生用：写真の長さ設定（手動調整） -->
+        <div class="length-setting-bar">
+          <span>写真の長さ設定：</span>
+          <div class="length-setting-inputs">
+            <select id="selectTargetCm" class="length-select"></select> cm
+            <select id="selectTargetMm" class="length-select"></select> mm
+          </div>
         </div>
       </div>
 
-      <!-- 計測ステージ -->
+      <!-- 計測ステージエリア -->
       <div class="stage-wrapper">
         
         <!-- 【てだすけ あり】専用：アニメーションバー -->
         <div id="assistAnimBar" class="assist-anim-bar">
           <div class="assist-guide-text">
             <span>💡</span>
-            <span id="assistGuideMessage">測りたい場所（物の右端）をタップすると拡大するよ！</span>
+            <span id="assistGuideMessage">「ズームして アニメーション」を押すと、拡大して 目盛りを 数えるよ！</span>
           </div>
-          <button id="btnStartAnim" class="btn-start-anim">
-            <span>▶️</span> アニメーション スタート
-          </button>
+          <div style="display: flex; gap: 8px;">
+            <button id="btnResetZoom" class="btn-reset-zoom">🔍 全体にもどす</button>
+            <button id="btnZoomAnim" class="btn-zoom-anim">
+              <span>▶️</span> ズームして アニメーション
+            </button>
+          </div>
         </div>
 
         <!-- 計測キャンバスエリア -->
-        <div id="stageCanvasArea" class="stage-canvas-area" title="タップして拡大">
-          <!-- メインSVG -->
-          <svg id="mainStageSvg" class="stage-svg" viewBox="0 0 840 200">
+        <div id="stageCanvasArea" class="stage-canvas-area">
+          
+          <div id="zoomBadge" class="zoom-indicator-badge">
+            <span>🔍 ズームアップ中 (拡大表示)</span>
+          </div>
+
+          <!-- メインSVG (写真 + ものさし + アニメーション線) -->
+          <svg id="mainStageSvg" class="stage-svg" viewBox="0 0 920 220">
             <defs>
               <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-                <feDropShadow dx="2" dy="3" stdDeviation="2" flood-opacity="0.25"/>
+                <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.35"/>
               </filter>
-              <!-- 0cm基準矢印マーカー -->
-              <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
-              </marker>
             </defs>
 
-            <!-- 0cm基準線ガイド（左端合わせの視覚支援） -->
-            <line x1="40" y1="10" x2="40" y2="185" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,4"/>
-            <text x="36" y="24" font-size="12" font-weight="900" fill="#2563eb" text-anchor="end">0に合わせる</text>
-
-            <!-- 定規の背景木目/プラスチック風 -->
-            <g id="rulerGroup" transform="translate(40, 90)">
-              <!-- 定規本体 0cm〜15cm (1cm = 48px, 15cm = 720px) -->
-              <rect x="0" y="0" width="760" height="90" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2" filter="url(#shadow)"/>
+            <!-- 測定エリアの全体ラッパーグループ（ズーム時の視点変更用） -->
+            <g id="viewportGroup">
               
-              <!-- 定規の目盛りグループ -->
-              <g id="rulerTicks"></g>
-              <!-- cmの数字ハイライト用グループ -->
-              <g id="cmHighlightOverlay"></g>
-              <!-- mm目盛りハイライト用グループ -->
-              <g id="mmHighlightOverlay"></g>
-            </g>
+              <!-- 写真レイヤー（背景） -->
+              <g id="photoBackgroundLayer">
+                <!-- デフォルトのデスクマット風背景 -->
+                <rect x="0" y="0" width="920" height="220" fill="#1e293b"/>
+                <g id="customPhotoImageGroup"></g>
+              </g>
 
-            <!-- 測定物グループ (0cm位置 X=40 に左端を合わせて配置) -->
-            <g id="objectGroup" transform="translate(40, 15)"></g>
+              <!-- 物体レイヤー (X=40 が 0cm 基準) -->
+              <g id="measuredObjectLayer" transform="translate(40, 18)"></g>
 
-            <!-- アニメーション用レイヤー -->
-            <g id="animationLayer" transform="translate(40, 0)">
-              <!-- cm基準線 -->
-              <line id="animCmLine" x1="0" y1="20" x2="0" y2="180" stroke="#dc2626" stroke-width="4.5" stroke-linecap="round" style="display:none;"/>
-              <rect id="animCmLabelBg" x="-28" y="2" width="56" height="26" rx="6" fill="#dc2626" style="display:none;"/>
-              <text id="animCmLabel" x="0" y="20" font-size="16" font-weight="900" fill="white" text-anchor="middle" style="display:none;">0cm</text>
-              
-              <!-- mmカウントアップ線グループ -->
-              <g id="animMmLinesGroup"></g>
+              <!-- 0cm基準ライン（視覚支援） -->
+              <line x1="40" y1="10" x2="40" y2="195" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="4,4"/>
+              <text x="36" y="24" font-size="12" font-weight="900" fill="#38bdf8" text-anchor="end">0に合わせる</text>
 
-              <!-- 停止時の目標マーカー線 -->
-              <line id="animTargetLine" x1="0" y1="20" x2="0" y2="180" stroke="#2563eb" stroke-width="3.5" stroke-dasharray="6,4" style="display:none;"/>
+              <!-- ものさし（定規）レイヤー (0cm〜15cm) -->
+              <g id="rulerGroup" transform="translate(40, 95)">
+                <!-- ものさし本体 -->
+                <rect x="0" y="0" width="760" height="92" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="2" filter="url(#shadow)"/>
+                <!-- ものさしの目盛り -->
+                <g id="rulerTicks"></g>
+                <!-- cmの数字ハイライト用グループ -->
+                <g id="cmHighlightOverlay"></g>
+                <!-- mm目盛りハイライト用グループ -->
+                <g id="mmHighlightOverlay"></g>
+              </g>
+
+              <!-- アニメーション描画レイヤー -->
+              <g id="animationLayer" transform="translate(40, 0)">
+                <!-- cm基準線（太い赤色線） -->
+                <line id="animCmLine" x1="0" y1="15" x2="0" y2="190" stroke="#dc2626" stroke-width="5" stroke-linecap="round" style="display:none;"/>
+                <rect id="animCmLabelBg" x="-32" y="2" width="64" height="28" rx="8" fill="#dc2626" style="display:none;"/>
+                <text id="animCmLabel" x="0" y="22" font-size="18" font-weight="900" fill="white" text-anchor="middle" style="display:none;">0cm</text>
+                
+                <!-- mmカウントアップ線グループ -->
+                <g id="animMmLinesGroup"></g>
+
+                <!-- 停止時の目標マーカー線 -->
+                <line id="animTargetLine" x1="0" y1="15" x2="0" y2="190" stroke="#0284c7" stroke-width="4.5" stroke-dasharray="6,4" style="display:none;"/>
+              </g>
+
             </g>
           </svg>
 
-          <!-- ルーペ拡大鏡（虫眼鏡） -->
-          <div id="loupeOverlay" class="loupe-overlay">
-            <button id="btnLoupeClose" class="loupe-close-btn" title="とじる">✕</button>
-            <div id="loupeContent" class="loupe-content">
-              <!-- ルーペ内クローンSVGがここに入る -->
-            </div>
-            <div class="loupe-crosshair"></div>
-            <div class="loupe-tag">ズーム中🔍</div>
-          </div>
         </div>
 
       </div>
@@ -1074,7 +1075,7 @@
           </div>
 
           <div id="inputIndicatorText" class="input-indicator-text">
-            いま「cm」を いれているよ（大きい線）
+            いま「cm」を いれているよ（大きい線の数字）
           </div>
         </div>
 
@@ -1135,8 +1136,8 @@
       <div id="hanamaruFeedbackText" class="hanamaru-text-sub">
         すごーい！しっかり はかれたね！
       </div>
-      <button id="btnNextQuestion" class="btn-next-question">
-        <span>➡️</span> つぎの もんだいへ！
+      <button id="btnNextAction" class="btn-next-action">
+        <span>📸</span> べつの 写真を はかろう！
       </button>
     </div>
   </div>
@@ -1144,7 +1145,7 @@
   <!-- JavaScript -->
   <script>
     /**
-     * アプリケーションの全体状態管理
+     * アプリケーション全体状態
      */
     const STATE = {
       mode: 'assist', // 'assist' | 'challenge'
@@ -1152,100 +1153,14 @@
       currentSlot: 'cm', // 'cm' | 'mm'
       inputCm: '',
       inputMm: '',
-      currentPresetKey: 'pencil',
-      currentProblem: null,
+      targetCm: 7,
+      targetMm: 4,
       isAnimating: false,
-      loupeActive: false,
+      isZoomed: false,
+      currentPhotoType: 'sample1', // 'sample1' | 'sample2' | 'user'
+      userImageDataUrl: null,
       PIXELS_PER_CM: 48,
       RULER_ORIGIN_X: 40,
-    };
-
-    /**
-     * プリセット問題データ
-     */
-    const PRESETS = {
-      pencil: {
-        id: 'pencil',
-        name: 'えんぴつ',
-        targetCm: 7,
-        targetMm: 4,
-        description: 'あかい えんぴつ',
-        render: (widthPx) => `
-          <g filter="url(#shadow)">
-            <rect x="0" y="24" width="${widthPx - 38}" height="28" rx="3" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
-            <line x1="0" y1="33" x2="${widthPx - 38}" y2="33" stroke="#fca5a5" stroke-width="2"/>
-            <line x1="0" y1="43" x2="${widthPx - 38}" y2="43" stroke="#991b1b" stroke-width="2"/>
-            <polygon points="${widthPx - 38},24 ${widthPx},38 ${widthPx - 38},52" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
-            <polygon points="${widthPx - 14},33 ${widthPx},38 ${widthPx - 14},43" fill="#1e293b"/>
-            <rect x="0" y="22" width="16" height="32" rx="2" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
-            <rect x="0" y="24" width="8" height="28" rx="2" fill="#f43f5e"/>
-          </g>
-        `
-      },
-      eraser: {
-        id: 'eraser',
-        name: 'けしごむ',
-        targetCm: 4,
-        targetMm: 2,
-        description: 'あおの けしごむ',
-        render: (widthPx) => `
-          <g filter="url(#shadow)">
-            <rect x="0" y="16" width="${widthPx}" height="44" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
-            <rect x="0" y="14" width="${widthPx * 0.72}" height="48" rx="5" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
-            <rect x="4" y="26" width="${widthPx * 0.72 - 8}" height="14" fill="#ffffff" rx="3"/>
-            <text x="${(widthPx * 0.72) / 2}" y="37" font-size="11" font-weight="900" fill="#2563eb" text-anchor="middle">ERASER</text>
-          </g>
-        `
-      },
-      clip: {
-        id: 'clip',
-        name: 'クリップ',
-        targetCm: 3,
-        targetMm: 5,
-        description: 'ゼムクリップ',
-        render: (widthPx) => `
-          <g filter="url(#shadow)">
-            <path d="
-              M 10 38
-              L ${widthPx - 14} 38
-              A 14 14 0 0 1 ${widthPx - 14} 64
-              L 16 64
-              A 12 12 0 0 1 16 26
-              L ${widthPx - 24} 26
-              A 9 9 0 0 1 ${widthPx - 24} 46
-              L 26 46
-            " fill="none" stroke="#0284c7" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        `
-      },
-      glue: {
-        id: 'glue',
-        name: 'スティックのり',
-        targetCm: 8,
-        targetMm: 7,
-        description: 'スティックのり',
-        render: (widthPx) => `
-          <g filter="url(#shadow)">
-            <rect x="0" y="24" width="24" height="34" rx="4" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
-            <rect x="22" y="22" width="${widthPx - 58}" height="38" rx="4" fill="#10b981" stroke="#059669" stroke-width="2"/>
-            <text x="${22 + (widthPx - 58) / 2}" y="46" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">GLUE STICK</text>
-            <rect x="${widthPx - 38}" y="18" width="38" height="46" rx="6" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
-          </g>
-        `
-      },
-      fork: {
-        id: 'fork',
-        name: 'フォーク',
-        targetCm: 12,
-        targetMm: 3,
-        description: 'ステンレスの フォーク',
-        render: (widthPx) => `
-          <g filter="url(#shadow)">
-            <path d="M 0 37 Q ${widthPx * 0.3} 33, ${widthPx * 0.65} 36 L ${widthPx * 0.65} 44 Q ${widthPx * 0.3} 47, 0 43 Z" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
-            <path d="M ${widthPx * 0.65} 35 Q ${widthPx * 0.75} 25, ${widthPx} 22 L ${widthPx} 28 Q ${widthPx * 0.77} 36, ${widthPx} 36 L ${widthPx} 42 Q ${widthPx * 0.77} 43, ${widthPx} 52 L ${widthPx * 0.75} 55 Q ${widthPx * 0.65} 45, ${widthPx * 0.65} 35 Z" fill="#cbd5e1" stroke="#64748b" stroke-width="1.5"/>
-          </g>
-        `
-      }
     };
 
     /**
@@ -1289,7 +1204,7 @@
       }
 
       playKeyTap() {
-        this.playTone(480, 'sine', 0.08, 0.2);
+        this.playTone(520, 'sine', 0.08, 0.2);
       }
 
       playCountTick(pitch = 600) {
@@ -1306,8 +1221,8 @@
         const gain = this.ctx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(320, now);
-        osc.frequency.exponentialRampToValueAtTime(200, now + 0.35);
+        osc.frequency.setValueAtTime(340, now);
+        osc.frequency.exponentialRampToValueAtTime(220, now + 0.35);
 
         gain.gain.setValueAtTime(0.3, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
@@ -1337,7 +1252,7 @@
           osc.type = 'triangle';
           osc.frequency.setValueAtTime(n.f, this.ctx.currentTime + n.time);
 
-          gain.gain.setValueAtTime(0.3, this.ctx.currentTime + n.time);
+          gain.gain.setValueAtTime(0.32, this.ctx.currentTime + n.time);
           gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + n.time + n.d);
 
           osc.connect(gain);
@@ -1362,15 +1277,15 @@
 
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'ja-JP';
-      utterance.rate = 0.92;
-      utterance.pitch = 1.15;
+      utterance.rate = 0.95; // クールで聞き取りやすいテンポ
+      utterance.pitch = 1.05; // 落ち着いた爽やかな先生の声
 
       const mouth = document.getElementById('teacherMouth');
       utterance.onstart = () => {
-        if (mouth) mouth.setAttribute('d', 'M 42 66 Q 50 82 58 66');
+        if (mouth) mouth.setAttribute('d', 'M 44 58 Q 50 66 56 58');
       };
       utterance.onend = () => {
-        if (mouth) mouth.setAttribute('d', 'M 44 68 Q 50 74 56 68');
+        if (mouth) mouth.setAttribute('d', 'M 45 59 Q 50 62 55 59');
       };
 
       window.speechSynthesis.speak(utterance);
@@ -1388,7 +1303,7 @@
     }
 
     /**
-     * 定規の目盛り描画
+     * 定規の目盛り描画 (0cm〜15cm)
      */
     function renderRulerTicks() {
       const ticksGroup = document.getElementById('rulerTicks');
@@ -1405,7 +1320,7 @@
         cmLine.setAttribute('x1', cmX);
         cmLine.setAttribute('y1', 0);
         cmLine.setAttribute('x2', cmX);
-        cmLine.setAttribute('y2', 36);
+        cmLine.setAttribute('y2', 38);
         cmLine.setAttribute('stroke', '#0f172a');
         cmLine.setAttribute('stroke-width', '2.8');
         ticksGroup.appendChild(cmLine);
@@ -1413,7 +1328,7 @@
         // cmの数字ラベル
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.setAttribute('x', cmX);
-        text.setAttribute('y', 60);
+        text.setAttribute('y', 64);
         text.setAttribute('font-size', '20');
         text.setAttribute('font-weight', '900');
         text.setAttribute('fill', '#0f172a');
@@ -1431,7 +1346,7 @@
             line.setAttribute('x1', mmX);
             line.setAttribute('y1', 0);
             line.setAttribute('x2', mmX);
-            line.setAttribute('y2', is5mm ? 25 : 16);
+            line.setAttribute('y2', is5mm ? 26 : 17);
             line.setAttribute('stroke', is5mm ? '#334155' : '#64748b');
             line.setAttribute('stroke-width', is5mm ? '2.2' : '1.3');
             line.setAttribute('id', `mmTick_${cm}_${mm}`);
@@ -1442,35 +1357,102 @@
     }
 
     /**
-     * 問題の読み込み・セット
+     * ステージの物体／写真の再描画
      */
-    function loadProblem(presetKey) {
-      STATE.currentPresetKey = presetKey;
-      const p = PRESETS[presetKey];
-      STATE.currentProblem = p;
+    function updateStageVisuals() {
+      const objLayer = document.getElementById('measuredObjectLayer');
+      const customImgGroup = document.getElementById('customPhotoImageGroup');
+      const widthPx = (STATE.targetCm * STATE.PIXELS_PER_CM) + (STATE.targetMm * (STATE.PIXELS_PER_CM / 10));
 
+      if (STATE.currentPhotoType === 'user' && STATE.userImageDataUrl) {
+        // ユーザーが撮影した写真モード
+        customImgGroup.innerHTML = `
+          <image href="${STATE.userImageDataUrl}" x="0" y="0" width="920" height="220" preserveAspectRatio="xMidYMid slice" opacity="0.45"/>
+        `;
+        // 写真上の物体測定バー
+        objLayer.innerHTML = `
+          <g filter="url(#shadow)">
+            <rect x="0" y="10" width="${widthPx}" height="65" rx="8" fill="rgba(56, 189, 248, 0.4)" stroke="#38bdf8" stroke-width="3"/>
+            <text x="${widthPx / 2}" y="48" font-size="18" font-weight="900" fill="#ffffff" text-anchor="middle">写真の ものの 長さ</text>
+            <!-- 右端ポインター -->
+            <polygon points="${widthPx - 10},0 ${widthPx},10 ${widthPx - 10},20" fill="#f97316"/>
+          </g>
+        `;
+      } else if (STATE.currentPhotoType === 'sample2') {
+        // 見本写真②: 消しゴム
+        customImgGroup.innerHTML = '';
+        objLayer.innerHTML = `
+          <g filter="url(#shadow)">
+            <rect x="0" y="16" width="${widthPx}" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+            <rect x="0" y="14" width="${widthPx * 0.72}" height="56" rx="5" fill="#0284c7" stroke="#0369a1" stroke-width="2"/>
+            <rect x="4" y="28" width="${widthPx * 0.72 - 8}" height="16" fill="#ffffff" rx="3"/>
+            <text x="${(widthPx * 0.72) / 2}" y="41" font-size="12" font-weight="900" fill="#0284c7" text-anchor="middle">MONO ERASER</text>
+          </g>
+        `;
+      } else {
+        // 見本写真①: ペン
+        customImgGroup.innerHTML = '';
+        objLayer.innerHTML = `
+          <g filter="url(#shadow)">
+            <rect x="0" y="24" width="${widthPx - 38}" height="32" rx="4" fill="#0284c7" stroke="#0369a1" stroke-width="2"/>
+            <line x1="0" y1="34" x2="${widthPx - 38}" y2="34" stroke="#7dd3fc" stroke-width="2"/>
+            <line x1="0" y1="46" x2="${widthPx - 38}" y2="46" stroke="#075985" stroke-width="2"/>
+            <polygon points="${widthPx - 38},24 ${widthPx},40 ${widthPx - 38},56" fill="#fde68a" stroke="#d97706" stroke-width="1.5"/>
+            <polygon points="${widthPx - 14},35 ${widthPx},40 ${widthPx - 14},45" fill="#0f172a"/>
+            <!-- クリップ金具 -->
+            <rect x="0" y="22" width="18" height="36" rx="2" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+            <rect x="0" y="25" width="9" height="30" rx="2" fill="#38bdf8"/>
+          </g>
+        `;
+      }
+
+      // 先生用セレクトボックス同期
+      document.getElementById('selectTargetCm').value = STATE.targetCm;
+      document.getElementById('selectTargetMm').value = STATE.targetMm;
+
+      // 入力初期化
       STATE.inputCm = '';
       STATE.inputMm = '';
       STATE.currentSlot = 'cm';
       updateAnswerBoxes();
       clearHighlights();
       resetAnimationLayer();
-      hideLoupe();
+      resetZoomView();
+    }
 
-      const objGroup = document.getElementById('objectGroup');
-      const widthPx = (p.targetCm * STATE.PIXELS_PER_CM) + (p.targetMm * (STATE.PIXELS_PER_CM / 10));
-      objGroup.innerHTML = p.render(widthPx);
+    /**
+     * ズームアップ状態の切り替え
+     * 「アニメーションはズームアップした状態でできるようにしてほしい」
+     */
+    function setZoomView(isZoomed) {
+      STATE.isZoomed = isZoomed;
+      const svg = document.getElementById('mainStageSvg');
+      const badge = document.getElementById('zoomBadge');
+      const resetBtn = document.getElementById('btnResetZoom');
 
-      if (STATE.mode === 'assist') {
-        updateTeacherSpeech(`「${p.name}」の ながさを はかろう！<br>みぎはしを タッチして 拡大したり、「アニメーション スタート」をおしてね！`);
-        document.getElementById('assistGuideMessage').textContent = '測りたい場所（物の右端）をタップすると拡大するよ！';
+      if (isZoomed) {
+        // ターゲットの右端（cm + mm）周辺に2.8倍ズーム
+        const targetX = STATE.RULER_ORIGIN_X + (STATE.targetCm * STATE.PIXELS_PER_CM) + (STATE.targetMm * (STATE.PIXELS_PER_CM / 10));
+        const zoom = 2.8;
+
+        // viewBoxを動的に変化させてスムーズにズーム
+        const viewW = 920 / zoom;
+        const viewH = 220 / zoom;
+        const viewX = Math.max(0, Math.min(920 - viewW, targetX - (viewW * 0.65)));
+        const viewY = 40; // 定規と右端のちょうど中間
+
+        svg.setAttribute('viewBox', `${viewX} ${viewY} ${viewW} ${viewH}`);
+        badge.style.display = 'inline-flex';
+        resetBtn.style.display = 'block';
       } else {
-        updateTeacherSpeech(`「${p.name}」の ながさを はかろう！<br>じぶんの 目で 定規を 見て、なんcm なんmmか 答えてみよう！`);
+        svg.setAttribute('viewBox', '0 0 920 220');
+        badge.style.display = 'none';
+        resetBtn.style.display = 'none';
       }
+    }
 
-      document.querySelectorAll('.preset-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.preset === presetKey);
-      });
+    function resetZoomView() {
+      setZoomView(false);
     }
 
     /**
@@ -1488,46 +1470,41 @@
       boxMm.classList.toggle('active', STATE.currentSlot === 'mm');
 
       if (STATE.currentSlot === 'cm') {
-        indicator.textContent = 'いま「cm」を いれているよ（大きい線）';
+        indicator.textContent = 'いま「cm」を いれているよ（大きい線の数字）';
       } else {
-        indicator.textContent = 'いま「mm」を いれているよ（小さい線）';
+        indicator.textContent = 'いま「mm」を いれているよ（小さい線の数）';
       }
     }
 
     /**
-     * ハイライト（cm / mm）のクリア
+     * ハイライトのクリア
      */
     function clearHighlights() {
-      const cmOverlay = document.getElementById('cmHighlightOverlay');
-      const mmOverlay = document.getElementById('mmHighlightOverlay');
-      cmOverlay.innerHTML = '';
-      mmOverlay.innerHTML = '';
-
-      const boxCm = document.getElementById('boxCm');
-      const boxMm = document.getElementById('boxMm');
-      boxCm.classList.remove('highlight-error');
-      boxMm.classList.remove('highlight-error');
+      document.getElementById('cmHighlightOverlay').innerHTML = '';
+      document.getElementById('mmHighlightOverlay').innerHTML = '';
+      document.getElementById('boxCm').classList.remove('highlight-error');
+      document.getElementById('boxMm').classList.remove('highlight-error');
     }
 
     /**
-     * cmの間違い時のハイライト演出
-     * 「定規のcm数字付近をハイライト」
+     * cmの間違い時仕様
+     * メッセージ：「おしい！ 大きい 線の すうじ（cm）を もういちど 見てみよう。もう一度 答えてみよう！」
+     * 視覚ヒント：定規のcm数字付近をハイライト
      */
     function highlightCmHint() {
       clearHighlights();
-      const p = STATE.currentProblem;
-      const targetCm = p.targetCm;
+      const targetCm = STATE.targetCm;
       const cmOverlay = document.getElementById('cmHighlightOverlay');
       const pxPerCm = STATE.PIXELS_PER_CM;
 
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circle.setAttribute('cx', targetCm * pxPerCm);
-      circle.setAttribute('cy', 56);
+      circle.setAttribute('cy', 60);
       circle.setAttribute('r', 25);
-      circle.setAttribute('fill', 'rgba(250, 204, 21, 0.45)');
+      circle.setAttribute('fill', 'rgba(250, 204, 21, 0.5)');
       circle.setAttribute('stroke', '#dc2626');
       circle.setAttribute('stroke-width', '4');
-      circle.setAttribute('class', 'highlight-cm-area');
+      circle.setAttribute('class', 'highlight-cm-pulse');
       cmOverlay.appendChild(circle);
 
       document.getElementById('boxCm').classList.add('highlight-error');
@@ -1536,17 +1513,16 @@
     }
 
     /**
-     * mmの間違い時のハイライト演出
-     * 「mm目盛り線をハイライト」
+     * mmの間違い時仕様
+     * メッセージ：「おしい！ 小さい 線（mm）を 1、2、3… と 数えてみよう。もう一度 答えてみよう！」
+     * 視覚ヒント：mm目盛り線をハイライト
      */
     function highlightMmHint() {
       clearHighlights();
-      const p = STATE.currentProblem;
-      const targetCm = p.targetCm;
-      const targetMm = p.targetMm;
+      const targetCm = STATE.targetCm;
+      const targetMm = STATE.targetMm;
       const mmOverlay = document.getElementById('mmHighlightOverlay');
       const pxPerCm = STATE.PIXELS_PER_CM;
-
       const startX = targetCm * pxPerCm;
 
       for (let mm = 1; mm <= targetMm; mm++) {
@@ -1555,10 +1531,9 @@
         line.setAttribute('x1', mmX);
         line.setAttribute('y1', 0);
         line.setAttribute('x2', mmX);
-        line.setAttribute('y2', 34);
+        line.setAttribute('y2', 36);
         line.setAttribute('stroke', '#dc2626');
         line.setAttribute('stroke-width', '4.5');
-        line.setAttribute('class', 'highlight-mm-area');
         mmOverlay.appendChild(line);
 
         const num = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -1581,40 +1556,36 @@
      * 採点処理
      */
     function checkAnswer() {
-      const p = STATE.currentProblem;
-      if (!p) return;
-
       const userCm = parseInt(STATE.inputCm, 10);
       const userMm = parseInt(STATE.inputMm, 10);
 
       if (isNaN(userCm) || isNaN(userMm)) {
         sound.playOshii();
         updateTeacherSpeech('すうじ を「cm」と「mm」の 両方に いれてみよう！');
-        if (isNaN(userCm)) {
-          STATE.currentSlot = 'cm';
-        } else {
-          STATE.currentSlot = 'mm';
-        }
+        STATE.currentSlot = isNaN(userCm) ? 'cm' : 'mm';
         updateAnswerBoxes();
         return;
       }
 
-      const isCmCorrect = (userCm === p.targetCm);
-      const isMmCorrect = (userMm === p.targetMm);
+      const isCmCorrect = (userCm === STATE.targetCm);
+      const isMmCorrect = (userMm === STATE.targetMm);
 
       if (isCmCorrect && isMmCorrect) {
+        // 1. 正解時
         clearHighlights();
         sound.playFanfare();
-        const successMsg = `すごーい！しっかり はかれたね！ ${p.targetCm}cm ${p.targetMm}mm だね。はなまる！`;
+        const successMsg = `すごーい！しっかり はかれたね！ ${STATE.targetCm}cm ${STATE.targetMm}mm だね。はなまる！`;
         updateTeacherSpeech(successMsg);
         showHanamaruModal(successMsg);
 
       } else if (!isCmCorrect) {
+        // 2. 「cm」の間違い時
         sound.playOshii();
         highlightCmHint();
         updateTeacherSpeech('おしい！ 大きい 線の すうじ（cm）を もういちど 見てみよう。もう一度 答えてみよう！');
 
       } else {
+        // 3. 「mm」の間違い時
         sound.playOshii();
         highlightMmHint();
         updateTeacherSpeech('おしい！ 小さい 線（mm）を 1、2、3… と 数えてみよう。もう一度 答えてみよう！');
@@ -1622,28 +1593,17 @@
     }
 
     function showHanamaruModal(message) {
-      const modal = document.getElementById('hanamaruModal');
-      const textElem = document.getElementById('hanamaruFeedbackText');
-      textElem.textContent = message;
-      modal.classList.add('show');
+      document.getElementById('hanamaruFeedbackText').textContent = message;
+      document.getElementById('hanamaruModal').classList.add('show');
     }
 
     function hideHanamaruModal() {
-      const modal = document.getElementById('hanamaruModal');
-      modal.classList.remove('show');
-    }
-
-    function goToNextProblem() {
-      hideHanamaruModal();
-      const keys = Object.keys(PRESETS);
-      const currentIndex = keys.indexOf(STATE.currentPresetKey);
-      const nextIndex = (currentIndex + 1) % keys.length;
-      loadProblem(keys[nextIndex]);
+      document.getElementById('hanamaruModal').classList.remove('show');
     }
 
     function resetAnimationLayer() {
       STATE.isAnimating = false;
-      const btn = document.getElementById('btnStartAnim');
+      const btn = document.getElementById('btnZoomAnim');
       if (btn) btn.disabled = false;
 
       document.getElementById('animCmLine').style.display = 'none';
@@ -1656,23 +1616,31 @@
     }
 
     /**
-     * 【てだすけ あり】目盛りアニメーション
+     * 【てだすけ あり】ズームアップ状態でのアニメーション
+     * 1. ズームアップ
+     * 2. cmの基準線表示
+     * 3. mmのカウントアップ
+     * 4. 目的位置で停止・点滅
      */
-    async function runGuideAnimation() {
+    async function runZoomGuideAnimation() {
       if (STATE.isAnimating) return;
       STATE.isAnimating = true;
 
-      const btn = document.getElementById('btnStartAnim');
+      const btn = document.getElementById('btnZoomAnim');
       btn.disabled = true;
       clearHighlights();
       resetAnimationLayer();
 
-      const p = STATE.currentProblem;
-      const targetCm = p.targetCm;
-      const targetMm = p.targetMm;
+      const targetCm = STATE.targetCm;
+      const targetMm = STATE.targetMm;
       const pxPerCm = STATE.PIXELS_PER_CM;
 
-      // 1. cmの基準線表示: 太い赤色の基準線を表示
+      // ステップ 0: ズームアップ！
+      setZoomView(true);
+      updateTeacherSpeech(`ズームアップしたよ！ よく 見てみよう。`, false);
+      await sleep(650);
+
+      // ステップ 1: cmの基準線表示（太い赤色の基準線）
       updateTeacherSpeech(`まず、大きい 線の ${targetCm}cm を 見るよ！`);
       sound.playCountTick(440);
 
@@ -1685,16 +1653,16 @@
       cmLine.setAttribute('x2', cmX);
       cmLine.style.display = 'block';
 
-      cmBg.setAttribute('x', cmX - 28);
+      cmBg.setAttribute('x', cmX - 32);
       cmBg.style.display = 'block';
 
       cmLabel.setAttribute('x', cmX);
       cmLabel.textContent = `${targetCm}cm`;
       cmLabel.style.display = 'block';
 
-      await sleep(1200);
+      await sleep(1300);
 
-      // 2. mmのカウントアップ: 「10cm1mm」「10cm2mm」…と、1mmごとに1本ずつ細い赤線が入る
+      // ステップ 2: mmのカウントアップ
       const mmGroup = document.getElementById('animMmLinesGroup');
 
       if (targetMm > 0) {
@@ -1707,11 +1675,11 @@
           const mmX = cmX + (mm * (pxPerCm / 10));
           const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
           line.setAttribute('x1', mmX);
-          line.setAttribute('y1', 20);
+          line.setAttribute('y1', 15);
           line.setAttribute('x2', mmX);
-          line.setAttribute('y2', 175);
+          line.setAttribute('y2', 185);
           line.setAttribute('stroke', '#ea580c');
-          line.setAttribute('stroke-width', '2.5');
+          line.setAttribute('stroke-width', '3');
           mmGroup.appendChild(line);
 
           const countText = `${targetCm}cm ${mm}mm`;
@@ -1722,7 +1690,7 @@
 
       await sleep(500);
 
-      // 3. 目的位置で停止: 線が点滅
+      // ステップ 3: 目的位置で停止・点滅
       const finalX = cmX + (targetMm * (pxPerCm / 10));
       const targetLine = document.getElementById('animTargetLine');
       targetLine.setAttribute('x1', finalX);
@@ -1731,7 +1699,7 @@
       targetLine.classList.add('target-line-blink');
 
       sound.playCountTick(880);
-      const finishMsg = `ここが はしっこ！ ぴったり ${targetCm}cm ${targetMm}mm だね！ 解答欄（かいとうらん）に いれてみよう！`;
+      const finishMsg = `ここが はしっこ！ ぴったり ${targetCm}cm ${targetMm}mm だね！ 解答欄に いれてみよう！`;
       updateTeacherSpeech(finishMsg);
       document.getElementById('assistGuideMessage').textContent = `✅ ぴったり ${targetCm}cm ${targetMm}mm！`;
 
@@ -1741,84 +1709,6 @@
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    /**
-     * ルーペ拡大鏡（虫眼鏡）機能
-     */
-    function setupLoupeInteraction() {
-      const stageArea = document.getElementById('stageCanvasArea');
-      const loupe = document.getElementById('loupeOverlay');
-      const closeBtn = document.getElementById('btnLoupeClose');
-
-      let isDragging = false;
-
-      stageArea.addEventListener('pointerdown', (e) => {
-        if (STATE.mode !== 'assist') return;
-        if (e.target === closeBtn) return;
-        sound.init();
-        isDragging = true;
-        showLoupeAtEvent(e);
-      });
-
-      window.addEventListener('pointermove', (e) => {
-        if (!isDragging || STATE.mode !== 'assist' || !STATE.loupeActive) return;
-        updateLoupePosition(e);
-      });
-
-      window.addEventListener('pointerup', () => {
-        isDragging = false;
-      });
-
-      closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hideLoupe();
-      });
-    }
-
-    function showLoupeAtEvent(e) {
-      const stageArea = document.getElementById('stageCanvasArea');
-      const loupe = document.getElementById('loupeOverlay');
-      const loupeContent = document.getElementById('loupeContent');
-      const mainSvg = document.getElementById('mainStageSvg');
-
-      STATE.loupeActive = true;
-      loupe.style.display = 'block';
-
-      loupeContent.innerHTML = '';
-      const clone = mainSvg.cloneNode(true);
-      clone.setAttribute('id', 'loupeCloneSvg');
-      loupeContent.appendChild(clone);
-
-      updateLoupePosition(e);
-      sound.playCountTick(650);
-    }
-
-    function updateLoupePosition(e) {
-      const stageArea = document.getElementById('stageCanvasArea');
-      const loupe = document.getElementById('loupeOverlay');
-      const loupeContent = document.getElementById('loupeContent');
-
-      const rect = stageArea.getBoundingClientRect();
-      const x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-      const y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
-
-      loupe.style.left = `${x}px`;
-      loupe.style.top = `${y}px`;
-
-      const zoom = 2.8;
-      const svgW = rect.width;
-      const svgH = rect.height;
-
-      loupeContent.style.width = `${svgW}px`;
-      loupeContent.style.height = `${svgH}px`;
-      loupeContent.style.transform = `scale(${zoom}) translate(${-x + 95 / zoom}px, ${-y + 95 / zoom}px)`;
-    }
-
-    function hideLoupe() {
-      STATE.loupeActive = false;
-      const loupe = document.getElementById('loupeOverlay');
-      if (loupe) loupe.style.display = 'none';
     }
 
     /**
@@ -1832,23 +1722,23 @@
 
       clearHighlights();
       resetAnimationLayer();
-      hideLoupe();
+      resetZoomView();
 
       if (newMode === 'assist') {
         btnAssist.classList.add('active');
         btnChallenge.classList.remove('active');
         assistAnimBar.style.display = 'flex';
-        updateTeacherSpeech('✨【てだすけ あり】モード だよ！<br>測りたい場所を タッチして 拡大したり、アニメーションで 目盛りを かぞえてみよう！');
+        updateTeacherSpeech('✨【てだすけ あり】モード だよ。<br>「ズームして アニメーション」を押して、拡大して 目盛りを 数えてみよう！');
       } else {
         btnChallenge.classList.add('active');
         btnAssist.classList.remove('active');
         assistAnimBar.style.display = 'none';
-        updateTeacherSpeech('🔥【てだすけ なし】モード だよ！<br>拡大や ガイドなしで、じぶんの 力で 定規の 目盛りを 読んでみよう！');
+        updateTeacherSpeech('🔥【てだすけ なし】モード だよ。<br>ズームなしで、自分の 目で ものさしの 目盛りを 読んでみよう！');
       }
     }
 
     /**
-     * テンキー操作の処理
+     * テンキー操作
      */
     function handleKeyInput(key) {
       sound.playKeyTap();
@@ -1876,9 +1766,7 @@
               STATE.inputCm = '15';
             }
           }
-          // cmを入力したら自動的にmmへフォーカス移行（自然な導線）
           if (STATE.inputCm.length >= 1) {
-            // 少し待ってからmmへ切り替え
             setTimeout(() => {
               if (STATE.inputCm !== '') {
                 STATE.currentSlot = 'mm';
@@ -1887,7 +1775,6 @@
             }, 300);
           }
         } else {
-          // mmは1桁 (0〜9)
           STATE.inputMm = key;
         }
       }
@@ -1896,62 +1783,105 @@
     }
 
     /**
-     * ユーザーの写真読み込み（カメラ / ファイルピッカー）
+     * 写真読み込みハンドラ
      */
-    function handlePhotoUpload(event) {
+    function handlePhotoFile(event) {
       const file = event.target.files[0];
       if (!file) return;
 
       const reader = new FileReader();
       reader.onload = (e) => {
-        const imgUrl = e.target.result;
-
-        // 写真用の問題（6cm 3mm）
-        PRESETS['custom_photo'] = {
-          id: 'custom_photo',
-          name: 'しゃしん',
-          targetCm: 6,
-          targetMm: 3,
-          description: 'さつえいした 写真',
-          render: (widthPx) => `
-            <g filter="url(#shadow)">
-              <rect x="0" y="8" width="${widthPx}" height="68" rx="8" fill="#e2e8f0" stroke="#0284c7" stroke-width="2"/>
-              <image href="${imgUrl}" x="0" y="8" width="${widthPx}" height="68" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoClip)"/>
-              <clipPath id="photoClip">
-                <rect x="0" y="8" width="${widthPx}" height="68" rx="8"/>
-              </clipPath>
-            </g>
-          `
-        };
-
-        loadProblem('custom_photo');
-        updateTeacherSpeech('すてきな 写真が はいったよ！<br>なんcm なんmmか はかってみよう！');
+        STATE.userImageDataUrl = e.target.result;
+        STATE.currentPhotoType = 'user';
+        updateStageVisuals();
+        updateTeacherSpeech('ものさしと 物体の 写真が はいったよ！<br>なんcm なんmmか はかってみよう！');
       };
       reader.readAsDataURL(file);
     }
 
     /**
-     * 初期化
+     * セレクトボックスの選択肢作成
+     */
+    function initSelectBoxes() {
+      const selectCm = document.getElementById('selectTargetCm');
+      const selectMm = document.getElementById('selectTargetMm');
+
+      for (let i = 0; i <= 15; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i;
+        selectCm.appendChild(opt);
+      }
+
+      for (let i = 0; i <= 9; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i;
+        selectMm.appendChild(opt);
+      }
+
+      selectCm.addEventListener('change', (e) => {
+        STATE.targetCm = parseInt(e.target.value, 10);
+        updateStageVisuals();
+      });
+
+      selectMm.addEventListener('change', (e) => {
+        STATE.targetMm = parseInt(e.target.value, 10);
+        updateStageVisuals();
+      });
+    }
+
+    /**
+     * アプリ初期化
      */
     function initApp() {
+      initSelectBoxes();
       renderRulerTicks();
-      loadProblem('pencil');
-      setupLoupeInteraction();
+      updateStageVisuals();
 
+      // モード切り替え
       document.getElementById('btnModeAssist').addEventListener('click', () => switchMode('assist'));
       document.getElementById('btnModeChallenge').addEventListener('click', () => switchMode('challenge'));
 
-      document.querySelectorAll('.preset-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          sound.playKeyTap();
-          loadProblem(e.currentTarget.dataset.preset);
-        });
+      // ズームアニメーションボタン
+      document.getElementById('btnZoomAnim').addEventListener('click', () => {
+        runZoomGuideAnimation();
       });
 
-      document.getElementById('btnStartAnim').addEventListener('click', () => {
-        runGuideAnimation();
+      // ズームリセットボタン
+      document.getElementById('btnResetZoom').addEventListener('click', () => {
+        resetZoomView();
       });
 
+      // 写真撮影・読み込みボタン
+      const fileInput = document.getElementById('fileInput');
+      document.getElementById('btnTakePhoto').addEventListener('click', () => {
+        sound.init();
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', handlePhotoFile);
+
+      // 見本写真①
+      document.getElementById('btnSamplePhoto1').addEventListener('click', (e) => {
+        sound.playKeyTap();
+        STATE.currentPhotoType = 'sample1';
+        STATE.targetCm = 7;
+        STATE.targetMm = 4;
+        updateStageVisuals();
+        updateTeacherSpeech('見本写真① (ペン) を セットしたよ！<br>ものさしで ながさを はかってみよう！');
+      });
+
+      // 見本写真②
+      document.getElementById('btnSamplePhoto2').addEventListener('click', (e) => {
+        sound.playKeyTap();
+        STATE.currentPhotoType = 'sample2';
+        STATE.targetCm = 4;
+        STATE.targetMm = 2;
+        updateStageVisuals();
+        updateTeacherSpeech('見本写真② (消しゴム) を セットしたよ！<br>ものさしで ながさを はかってみよう！');
+      });
+
+      // 解答スロット選択
       document.getElementById('boxCm').addEventListener('click', () => {
         sound.playKeyTap();
         STATE.currentSlot = 'cm';
@@ -1964,13 +1894,14 @@
         updateAnswerBoxes();
       });
 
+      // テンキー
       document.querySelectorAll('.key-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          const key = e.currentTarget.dataset.key;
-          handleKeyInput(key);
+          handleKeyInput(e.currentTarget.dataset.key);
         });
       });
 
+      // キーボード入力
       window.addEventListener('keydown', (e) => {
         if (e.key >= '0' && e.key <= '9') {
           handleKeyInput(e.key);
@@ -1984,11 +1915,13 @@
         }
       });
 
+      // もう一度聞く
       document.getElementById('btnReplayVoice').addEventListener('click', () => {
         const plainText = document.getElementById('speechText').textContent;
         speakTeacher(plainText);
       });
 
+      // 音声トグル
       document.getElementById('btnSoundToggle').addEventListener('click', () => {
         STATE.soundEnabled = !STATE.soundEnabled;
         const icon = document.getElementById('soundIcon');
@@ -2005,16 +1938,10 @@
         }
       });
 
-      const fileInput = document.getElementById('fileInput');
-      document.getElementById('btnUploadPhoto').addEventListener('click', () => {
-        sound.init();
+      // モーダル次のアクション
+      document.getElementById('btnNextAction').addEventListener('click', () => {
+        hideHanamaruModal();
         fileInput.click();
-      });
-      fileInput.addEventListener('change', handlePhotoUpload);
-
-      document.getElementById('btnNextQuestion').addEventListener('click', () => {
-        sound.playKeyTap();
-        goToNextProblem();
       });
 
       window.addEventListener('pointerdown', () => {
